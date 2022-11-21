@@ -12,6 +12,7 @@ namespace Chatter.Server.UserService
         public UserHandeler() 
         {
             users = new List<User>();
+            new TokenHandeler();
         }
         public static User GetUser(int id)
         {
@@ -19,7 +20,6 @@ namespace Chatter.Server.UserService
         }
         public static void AddUser(User user)
         {
-            user.Id = GetNewId();
             users.Add(user);
         }
         public static int GetNewId() 

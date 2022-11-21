@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33027.239
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatterServer", "ChatterServer\ChatterServer.csproj", "{FC8D3807-4814-45EB-B10E-67BB146FAB99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatterClient", "Chatter\ChatterClient.csproj", "{37718574-7922-4B38-A773-90AE4FA69FC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FC8D3807-4814-45EB-B10E-67BB146FAB99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC8D3807-4814-45EB-B10E-67BB146FAB99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC8D3807-4814-45EB-B10E-67BB146FAB99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37718574-7922-4B38-A773-90AE4FA69FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37718574-7922-4B38-A773-90AE4FA69FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37718574-7922-4B38-A773-90AE4FA69FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37718574-7922-4B38-A773-90AE4FA69FC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

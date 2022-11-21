@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using CoolConsole.MenuItems;
 using CoolConsole;
 using System.Net;
+using Chatter.Server.UserService;
+using System.Runtime.CompilerServices;
 
 namespace Chatter.Server
 {
@@ -22,14 +24,33 @@ namespace Chatter.Server
 			List<MenuItem> list = new List<MenuItem>
 			{
 				new NumboxMenuItem("Port",87),
-                new TextboxMenuItem("IP","127.0.0.1"),
-                new MenuItem("Start Server"),
+				new TextboxMenuItem("IP","127.0.0.1"),
+				new MenuItem("Start Server"),
 			};
 			ReturnCode output = Menu.Show(list);
-			int port = output.Numboxes[0]._Value;
-			IPAddress Ip = IPAddress.Parse(output.Textboxes[0]._Value);
-			server.Start(Ip,port);
+            int port = output.Numboxes[0]._Value;
+            IPAddress Ip = IPAddress.Parse(output.Textboxes[0]._Value);
+			Init(port, Ip);
+            while (true) 
+			{
+				string input = Console.ReadLine();
+			}
 		}
+		public static void Init(int port, IPAddress address)
+		{
+            new UserHandeler();
+            User test = new User()
+            {
+                Id = UserHandeler.GetNewId(),
+                Name = "Test",
+                Password = "Test",
+            };
+            UserHandeler.AddUser(test);
+            string token = TokenHandeler.AddToken(test);
+            Console.WriteLine(token);
+            
+            server.Start(address, port);
+        }
 
 		private static void Server_DataReceived(object sender, Message e)
 		{

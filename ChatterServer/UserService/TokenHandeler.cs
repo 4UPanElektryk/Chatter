@@ -18,6 +18,10 @@ namespace Chatter.Server.UserService
 			Random random = new Random();
 			int num = random.Next();
 			string token = Convert.ToBase64String(Encoding.UTF8.GetBytes(num.ToString()));
+			while (ActiveTokens.ContainsKey(token))
+			{
+                token = Convert.ToBase64String(Encoding.UTF8.GetBytes(num.ToString()));
+            }
             ActiveTokens.Add(token, user.Id);
 			return token;
 		}
