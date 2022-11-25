@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,21 +17,28 @@ namespace Chatter.Server.UserService
 		public UserHandeler(string path) 
 		{
 			users = new List<User>();
-			new TokenHandeler();
 			Path = path;
 		}
-
 		public static void Load()
 		{
 			if (!File.Exists(Path))
 			{
+				User admin = new User
+				{
+					Id = 0,
+					Name = "ADMIN",
+					IsAdmin = true,
+					TextColor = Color.Red,
+					Password = "01234567"
+				};
+				users.Add(admin);
 				return;
 			}
 			users = (List<User>)JsonConvert.DeserializeObject(File.ReadAllText(Path));
 		}
 		public static void Save() 
 		{
-			File.WriteAllText(Path,JsonConvert.SerializeObject(users));
+			File.WriteAllText(Path,JsonConvert.SerializeObject(users,Formatting.Indented));
 		}
 		public static User GetUser(int id)
 		{

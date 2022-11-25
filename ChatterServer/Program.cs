@@ -33,28 +33,25 @@ namespace Chatter.Server
 			Init(port, Ip);
             while (true) 
 			{
-				string input = Console.ReadLine();
+                string input = Console.ReadLine();
 			}
 		}
 		public static void Init(int port, IPAddress address)
 		{
-            new UserHandeler();
-            User test = new User()
-            {
-                Id = UserHandeler.GetNewId(),
-                Name = "Test",
-                Password = "Test",
-            };
-            UserHandeler.AddUser(test);
-            string token = TokenHandeler.AddToken(test);
-            Console.WriteLine(token);
-            
+            new UserHandeler("UserDataBase.json");
+            new TokenHandeler();
             server.Start(address, port);
         }
 
 		private static void Server_DataReceived(object sender, Message e)
 		{
 			
+		}
+		public static void CWrite(string text, ConsoleColor color)
+		{
+			Console.ForegroundColor = color;
+			Console.WriteLine(text);
+			Console.ResetColor();
 		}
 	}
 }

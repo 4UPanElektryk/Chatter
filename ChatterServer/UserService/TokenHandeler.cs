@@ -11,7 +11,7 @@ namespace Chatter.Server.UserService
 		private static Dictionary<string, int> ActiveTokens;
 		public TokenHandeler() 
 		{
-			ActiveTokens= new Dictionary<string, int>();
+			ActiveTokens = new Dictionary<string, int>();
 		}
 		public static string AddToken(User user)
 		{

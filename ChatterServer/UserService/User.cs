@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Chatter.Server.UserService
 {
@@ -12,6 +13,7 @@ namespace Chatter.Server.UserService
         public string Name { get; set; }
         public string Password { get; set; }
         public bool IsAdmin { get; set; }
+        public Color TextColor { get; set; }
         public User() { }
     }
 }

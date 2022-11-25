@@ -1,4 +1,4 @@
-﻿namespace Chatter.Server
+﻿namespace Chatter.AdminPanel.Commands
 {
     public class Command
     {
