@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
+using SimpleLogs4Net;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chatter.Server.MessageService
 {
@@ -15,25 +14,36 @@ namespace Chatter.Server.MessageService
         {
             msgs = new List<Msg>();
             Path = path;
+            Load();
         }
         public static void Load()
         {
             if (!File.Exists(Path))
             {
+                Log.Write("Message Database file missing: " + Path, EType.Warning);
                 return;
             }
-            msgs = (List<Msg>)JsonConvert.DeserializeObject(File.ReadAllText(Path));
+            Log.Write("Loading Message database from: " + Path, EType.Informtion);
+            msgs = JsonConvert.DeserializeObject<List<Msg>>(File.ReadAllText(Path));
+        }
+        public static void Save()
+        {
+            Log.Write("Saving Message database to: " + Path, EType.Informtion);
+            File.WriteAllText(Path,JsonConvert.SerializeObject(msgs,Formatting.Indented));
         }
         public static void AddMsg(Msg msg)
         {
-            msg.Sent = DateTime.UtcNow;
-            msg.MessageID = GetNewID();
+            msg._Sent = DateTime.UtcNow;
+            int id = GetNewID();
+            Log.Write("Message Added to Database: " + id);
+            msg._MessageID = id;
             msgs.Add(msg);
+            Save();
         }
         public static int GetNewID()
         {
             int ID = 0;
-            msgs.ForEach(msg => { if (msg.MessageID >= ID) { ID = msg.MessageID; } });
+            msgs.ForEach(msg => { if (msg._MessageID >= ID) { ID = msg._MessageID; } });
             return ID++;
         }
     }

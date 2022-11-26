@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SimpleLogs4Net;
 
 namespace Chatter.Server.UserService
 {
@@ -18,33 +14,38 @@ namespace Chatter.Server.UserService
 		{
 			users = new List<User>();
 			Path = path;
+			Load();
 		}
 		public static void Load()
 		{
 			if (!File.Exists(Path))
-			{
-				User admin = new User
+            {
+                Log.Write("User Database file missing: " + Path, EType.Warning);
+                User admin = new User
 				{
-					Id = 0,
-					Name = "ADMIN",
-					IsAdmin = true,
-					TextColor = Color.Red,
-					Password = "01234567"
+					_Id = 0,
+					_Name = "ADMIN",
+					_IsAdmin = true,
+					_TextColor = Color.Red,
+					_Password = "01234567"
 				};
 				users.Add(admin);
+				Save();
 				return;
 			}
-			users = (List<User>)JsonConvert.DeserializeObject(File.ReadAllText(Path));
+            Log.Write("Loading User database from: " + Path, EType.Informtion);
+            users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(Path));
 		}
 		public static void Save() 
 		{
-			File.WriteAllText(Path,JsonConvert.SerializeObject(users,Formatting.Indented));
+            Log.Write("Saving User database to: " + Path, EType.Informtion);
+            File.WriteAllText(Path,JsonConvert.SerializeObject(users,Formatting.Indented));
 		}
 		public static User GetUser(int id)
 		{
 			foreach (User user in users)
 			{
-				if (user.Id == id)
+				if (user._Id == id)
 				{
 					return user;
 				}
@@ -58,7 +59,7 @@ namespace Chatter.Server.UserService
 		public static int GetNewId() 
 		{
 			int id = 0;
-			users.ForEach(user => { if (user.Id >= id) { id = user.Id + 1; } });
+			users.ForEach(user => { if (user._Id >= id) { id = user._Id + 1; } });
 			return id;
 		}
 	}

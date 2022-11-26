@@ -19,7 +19,7 @@ namespace Chatter.Server.CommandService
         public static string Run()
         {
             string output = " ";
-            return
+            return output;
         }
     }
 }

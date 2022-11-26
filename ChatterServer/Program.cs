@@ -8,7 +8,9 @@ using CoolConsole.MenuItems;
 using CoolConsole;
 using System.Net;
 using Chatter.Server.UserService;
+using Chatter.Server.MessageService;
 using System.Runtime.CompilerServices;
+using SimpleLogs4Net;
 
 namespace Chatter.Server
 {
@@ -18,7 +20,7 @@ namespace Chatter.Server
 		static void Main(string[] args)
 		{
 			server = new SimpleTcpServer();
-			server.Delimiter = 0x13;//enter
+			server.Delimiter = (byte)'\r';//enter
             server.StringEncoder = Encoding.UTF8;
 			server.DataReceived += Server_DataReceived;
 			List<MenuItem> list = new List<MenuItem>
@@ -28,20 +30,41 @@ namespace Chatter.Server
 				new MenuItem("Start Server"),
 			};
 			ReturnCode output = Menu.Show(list);
-            int port = output.Numboxes[0]._Value;
-            IPAddress Ip = IPAddress.Parse(output.Textboxes[0]._Value);
+			int port = output.Numboxes[0]._Value;
+			IPAddress Ip = IPAddress.Parse(output.Textboxes[0]._Value);
 			Init(port, Ip);
-            while (true) 
+			while (true) 
 			{
-                string input = Console.ReadLine();
+				string input = Console.ReadLine();
+				if (input == "test")
+				{
+					Msg msg = new Msg 
+					{
+						_UserID = 0,
+						_Message = new string[]{ "test","test" },
+					};
+					MsgHandeler.AddMsg(msg);
+				}
+				if (input.ToLower() == "stop")
+				{
+					MsgHandeler.Save();
+					UserHandeler.Save();
+					return;
+				}
 			}
 		}
 		public static void Init(int port, IPAddress address)
 		{
-            new UserHandeler("UserDataBase.json");
-            new TokenHandeler();
-            server.Start(address, port);
-        }
+			new Log("Logs\\", OutputStream.Both, "Log");
+			new UserHandeler(".\\Data\\UserDataBase.json");
+			new MsgHandeler(".\\Data\\MessageBase.json");
+			new TokenHandeler();
+			server.Start(address, port);
+			if (server.IsStarted)
+			{
+				Log.Write("Server Started on " + address.ToString() + ":" + port, EType.Informtion);
+			}
+		}
 
 		private static void Server_DataReceived(object sender, Message e)
 		{

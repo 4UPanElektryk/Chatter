@@ -22,7 +22,7 @@ namespace Chatter.Server.UserService
 			{
                 token = Convert.ToBase64String(Encoding.UTF8.GetBytes(num.ToString()));
             }
-            ActiveTokens.Add(token, user.Id);
+            ActiveTokens.Add(token, user._Id);
 			return token;
 		}
 

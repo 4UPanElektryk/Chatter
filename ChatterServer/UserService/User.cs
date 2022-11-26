@@ -9,11 +9,11 @@ namespace Chatter.Server.UserService
 {
     public class User
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Password { get; set; }
-        public bool IsAdmin { get; set; }
-        public Color TextColor { get; set; }
+        public int _Id { get; set; }
+        public string _Name { get; set; }
+        public string _Password { get; set; }
+        public bool _IsAdmin { get; set; }
+        public Color _TextColor { get; set; }
         public User() { }
     }
 }
