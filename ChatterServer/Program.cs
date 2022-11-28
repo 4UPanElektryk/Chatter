@@ -70,11 +70,5 @@ namespace Chatter.Server
 		{
 			
 		}
-		public static void CWrite(string text, ConsoleColor color)
-		{
-			Console.ForegroundColor = color;
-			Console.WriteLine(text);
-			Console.ResetColor();
-		}
 	}
 }

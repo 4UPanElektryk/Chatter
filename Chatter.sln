@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatterServer", "ChatterSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatterAdminPanel", "ChatterAdminPanel\ChatterAdminPanel.csproj", "{2B375B26-08A6-4801-821A-A3B04C8A2D1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatterClient", "ChatterClient\ChatterClient.csproj", "{15B7F5DA-E4F5-4791-BFFC-DFCCFA6443A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2B375B26-08A6-4801-821A-A3B04C8A2D1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B375B26-08A6-4801-821A-A3B04C8A2D1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B375B26-08A6-4801-821A-A3B04C8A2D1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15B7F5DA-E4F5-4791-BFFC-DFCCFA6443A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B7F5DA-E4F5-4791-BFFC-DFCCFA6443A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B7F5DA-E4F5-4791-BFFC-DFCCFA6443A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B7F5DA-E4F5-4791-BFFC-DFCCFA6443A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

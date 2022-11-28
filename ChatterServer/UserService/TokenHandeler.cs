@@ -25,7 +25,6 @@ namespace Chatter.Server.UserService
             ActiveTokens.Add(token, user._Id);
 			return token;
 		}
-
 		public static User GetUser(string token) 
 		{
 			foreach (var item in ActiveTokens)
