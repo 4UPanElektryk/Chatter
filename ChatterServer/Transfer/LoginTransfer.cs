@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Chatter.Server.Transfer
 {
-    internal class MsgTransfer
+    public class LoginTransfer
     {
+        public string Login { get; set; }
+        public string Password { get; set; }
     }
 }

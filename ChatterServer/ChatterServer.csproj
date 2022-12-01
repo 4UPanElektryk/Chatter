@@ -57,7 +57,7 @@
     <Compile Include="MessageService\MsgHandeler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transfer\MsgTransfer.cs" />
+    <Compile Include="Transfer\LoginTransfer.cs" />
     <Compile Include="UserService\TokenHandeler.cs" />
     <Compile Include="UserService\User.cs" />
     <Compile Include="UserService\UserHandeler.cs" />

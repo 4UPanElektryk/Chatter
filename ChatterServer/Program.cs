@@ -20,7 +20,7 @@ namespace Chatter.Server
 		static void Main(string[] args)
 		{
 			server = new SimpleTcpServer();
-			server.Delimiter = (byte)'\r';//enter
+			server.Delimiter = (byte)'\n';//enter
             server.StringEncoder = Encoding.UTF8;
 			server.DataReceived += Server_DataReceived;
 			List<MenuItem> list = new List<MenuItem>
