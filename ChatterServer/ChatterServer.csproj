@@ -51,6 +51,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandService\CmdLogin.cs" />
     <Compile Include="CommandService\Command.cs" />
     <Compile Include="CommandService\CommandHandeler.cs" />
     <Compile Include="MessageService\Msg.cs" />

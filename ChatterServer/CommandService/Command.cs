@@ -1,4 +1,5 @@
-﻿namespace Chatter.Server.CommandService
+﻿using Chatter.Server.UserService;
+namespace Chatter.Server.CommandService
 {
     public class Command
     {
@@ -7,9 +8,9 @@
         {
             Name = name;
         }
-        public virtual bool Execute(string text)
+        public virtual string Execute(string text,User user)
         {
-            return true;
+            return "";
         }
     }
 }

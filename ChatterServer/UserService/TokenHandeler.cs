@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Chatter.Server.UserService
 {
@@ -15,6 +13,10 @@ namespace Chatter.Server.UserService
 		}
 		public static string AddToken(User user)
 		{
+			if (user == null)
+			{
+				return "0";
+			}
 			Random random = new Random();
 			int num = random.Next();
 			string token = Convert.ToBase64String(Encoding.UTF8.GetBytes(num.ToString()));
@@ -27,6 +29,10 @@ namespace Chatter.Server.UserService
 		}
 		public static User GetUser(string token) 
 		{
+			if (token == "0")
+			{
+				return null;
+			}
 			foreach (var item in ActiveTokens)
 			{
 				if (item.Key == token)

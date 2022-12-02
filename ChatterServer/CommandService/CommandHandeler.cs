@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Chatter.Server.UserService;
 
 namespace Chatter.Server.CommandService
 {
@@ -11,13 +9,24 @@ namespace Chatter.Server.CommandService
         public static List<Command> commands;
         public CommandHandeler()
         {
-            commands = new List<Command> 
-            { 
-            
+            commands = new List<Command>
+            {
+                new CmdLogin("login"),
             };
         }
-        public static string Run()
+        public static string Run(string input)
         {
+            string[] s = input.Split(new string[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
+            string name = s[0];
+            User user = TokenHandeler.GetUser(s[1]);
+            string data = s[2];
+            foreach (Command item in commands)
+            {
+                if (name.ToLower().StartsWith(item.Name))
+                {
+                    return item.Execute(data,user);
+                }
+            }
             string output = " ";
             return output;
         }

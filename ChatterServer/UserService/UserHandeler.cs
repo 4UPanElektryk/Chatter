@@ -52,7 +52,18 @@ namespace Chatter.Server.UserService
 			}
 			return null;
 		}
-		public static void AddUser(User user)
+        public static User GetUser(string Login, string Password)
+        {
+            foreach (User user in users)
+            {
+                if (user._Name == Login && user._Password == Password)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
+        public static void AddUser(User user)
 		{
 			users.Add(user);
 		}
