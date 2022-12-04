@@ -51,14 +51,20 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandService\CmdAdminLogin.cs" />
+    <Compile Include="CommandService\CmdDrop.cs" />
+    <Compile Include="CommandService\CmdInfo.cs" />
     <Compile Include="CommandService\CmdLogin.cs" />
     <Compile Include="CommandService\Command.cs" />
     <Compile Include="CommandService\CommandHandeler.cs" />
+    <Compile Include="Config.cs" />
     <Compile Include="MessageService\Msg.cs" />
     <Compile Include="MessageService\MsgHandeler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transfer\LoginTransfer.cs" />
+    <Compile Include="TConfig.cs" />
+    <Compile Include="Transfer\TransferInfo.cs" />
+    <Compile Include="Transfer\TransferLogin.cs" />
     <Compile Include="UserService\TokenHandeler.cs" />
     <Compile Include="UserService\User.cs" />
     <Compile Include="UserService\UserHandeler.cs" />

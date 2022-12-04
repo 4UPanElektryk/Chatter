@@ -36,9 +36,6 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleLogs4Net, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleLogs4Net.2.0.0\lib\netstandard2.0\SimpleLogs4Net.dll</HintPath>
-    </Reference>
     <Reference Include="SimpleTCP, Version=1.0.24.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SimpleTCP.1.0.24\lib\net45\SimpleTCP.dll</HintPath>
     </Reference>
@@ -47,10 +44,13 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CmdInfo.cs" />
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandHandeler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Transfer\LoginTransfer.cs" />
+    <Compile Include="Transfer\TransferInfo.cs" />
+    <Compile Include="Transfer\TransferLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

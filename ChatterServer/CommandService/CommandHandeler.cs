@@ -11,7 +11,10 @@ namespace Chatter.Server.CommandService
         {
             commands = new List<Command>
             {
+                new CmdAdminLogin("adminlogin"),
                 new CmdLogin("login"),
+                new CmdDrop("drop"),
+                new CmdInfo("info"),
             };
         }
         public static string Run(string input)

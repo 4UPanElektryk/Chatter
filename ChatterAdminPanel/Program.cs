@@ -3,6 +3,7 @@ using System;
 using System.Text;
 using Newtonsoft.Json;
 using Chatter.AdminPanel.Transfer;
+using Chatter.AdminPanel.Commands;
 
 namespace Chatter.AdminPanel
 {
@@ -15,11 +16,12 @@ namespace Chatter.AdminPanel
             Init();
             Connect();
             Login();
-			Console.WriteLine("Your logged");
-			Console.ReadKey(true);
+			Console.WriteLine("Your Logged In");
+            MainLoop();
         }
 		static void Init()
 		{
+            new CommandHandeler();
             _Client = new SimpleTcpClient
             {
                 StringEncoder = Encoding.UTF8,
@@ -77,6 +79,13 @@ namespace Chatter.AdminPanel
                     }
                 }
             } while (true);
+        }
+        static void MainLoop()
+        {
+            while (true)
+            {
+                CommandHandeler.Run(Console.ReadLine());
+            }
         }
     }
 }
