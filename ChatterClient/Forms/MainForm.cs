@@ -37,5 +37,12 @@ namespace ChatterClient
         {
             Clipboard.SetText(TOKEN);
         }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoginForm form = new LoginForm();
+            form.ShowDialog();
+            TOKEN = form.Token;
+        }
     }
 }
