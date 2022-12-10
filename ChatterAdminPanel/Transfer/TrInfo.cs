@@ -12,6 +12,5 @@ namespace Chatter.AdminPanel.Transfer
         public DateTime Time { get; set; }
         public string ServerName { get; set; }
         public string ServerVersion { get; set; }
-        public int Port { get; set; }
     }
 }

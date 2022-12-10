@@ -11,6 +11,8 @@ namespace Chatter.AdminPanel
 	{
 		public static SimpleTcpClient _Client;
         public static string Token = string.Empty;
+        public static string Address = string.Empty;
+        public static int Port = 0;
 		static void Main(string[] args)
 		{
             Init();
@@ -33,13 +35,24 @@ namespace Chatter.AdminPanel
 		{
             while (true)
             {
-                Console.Write("IP >");
+                Console.Write("Address >");
                 string address = Console.ReadLine();
                 Console.Write("Port >");
                 try
                 {
-                    int port = int.Parse(Console.ReadLine());
+                    int port;
+                    if (!address.Contains(":"))
+                    {
+                        port = int.Parse(Console.ReadLine());
+                    }
+                    else
+                    {
+                        port = int.Parse(address.Split(':')[1]);
+                        Console.WriteLine(port);
+                    }
                     _Client.Connect(address, port);
+                    Address = address;
+                    Port = port;
                     break;
                 }
                 catch

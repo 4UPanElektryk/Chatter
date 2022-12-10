@@ -20,10 +20,16 @@ namespace Chatter.Server
         {
             if (!File.Exists(Path))
             {
-                Data = new TConfig 
+                Data = new TConfig
                 {
                     ServerName = "StandardChatterServer",
-                    ServerVersion = "1.0.0"
+                    ServerVersion = "1.0.0",
+                    ServerIPAddress = "127.0.0.1",
+                    ServerPort = 87,
+                    UserBaseFile = "UserDataBase.json",
+                    MessagebaseFile = "MessageDataBase.json",
+                    LogsDirectory = "Logs\\",
+                    LogsPrefix = "Log"
                 };
                 Save();
                 return;

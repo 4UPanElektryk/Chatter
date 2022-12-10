@@ -18,7 +18,7 @@ namespace Chatter.AdminPanel.Commands
             TrInfo data = JsonConvert.DeserializeObject<TrInfo>(Program._Client.WriteLineAndGetReply("info\n" + Program.Token +"\n", TimeSpan.FromSeconds(300)).MessageString);
             Console.WriteLine("Client Username: " + data.Username);
             Console.WriteLine("Server: " + data.ServerName + "/" + data.ServerVersion);
-            Console.WriteLine("Server Prot: " + data.Port);
+            Console.WriteLine("Server Address: " + Program.Address + ":" + Program.Port);
             Console.WriteLine("Server Time: " + data.Time.ToString("dd/MM/yyyy HH:mm:ss"));
             return true;
         }

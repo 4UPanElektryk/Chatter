@@ -20,13 +20,10 @@ namespace Chatter.Server
 	public class Program
 	{
 		static SimpleTcpServer server;
-		public static bool LinuxBased;
 		public static List<TcpClient> Clients;
 		public static bool Working = true;
-		public static int Port;
 		static void Main(string[] args)
 		{
-			LinuxBased = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
 			server = new SimpleTcpServer
 			{
 				Delimiter = (byte)'\n',
@@ -53,36 +50,23 @@ namespace Chatter.Server
 				//CommandHandeler.Run(input);
 			}
 		}
+		public static string ConvertPlatform(string input) 
+		{
+			return RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? input.Replace('\\','/') : input;
+		}
 		private static void Init()
 		{
-			List<MenuItem> list = new List<MenuItem>
-			{
-				new NumboxMenuItem("Port",87),
-				new TextboxMenuItem("IP","127.0.0.1"),
-				new MenuItem("Start Server"),
-			};
-			ReturnCode output = Menu.Show(list);
 			new CommandHandeler();
-			if (LinuxBased)
-			{
-				new Log("Logs/", OutputStream.Both, "Log");
-				new UserHandeler("./Data/UserDataBase.json");
-				new MsgHandeler("./Data/MessageBase.json");
-			}
-			else
-			{
-				new Log("Logs\\", OutputStream.Both, "Log");
-				new UserHandeler(".\\Data\\UserDataBase.json");
-				new MsgHandeler(".\\Data\\MessageBase.json");
-			}
+			new Log(ConvertPlatform(Config.Data.LogsDirectory), OutputStream.Both, Config.Data.LogsPrefix);
+			new UserHandeler(ConvertPlatform(Config.Data.UserBaseFile));
+			new MsgHandeler(ConvertPlatform(Config.Data.MessagebaseFile));
 			new Config("config.json");
 			Config.Load();
 			new TokenHandeler();
-			server.Start(IPAddress.Parse(output.Textboxes[0]._Value), output.Numboxes[0]._Value);
-			Port = output.Numboxes[0]._Value;
+			server.Start(IPAddress.Parse(Config.Data.ServerIPAddress), Config.Data.ServerPort);
 			if (server.IsStarted)
 			{
-				Log.Write("Server Started on " + output.Textboxes[0]._Value + ":" + output.Numboxes[0]._Value, EType.Informtion);
+				Log.Write("Server Started on " + Config.Data.ServerIPAddress + ":" + Config.Data.ServerPort, EType.Informtion);
 			}
 		}
 		#region Clinet

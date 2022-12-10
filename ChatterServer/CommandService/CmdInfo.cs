@@ -16,7 +16,6 @@ namespace Chatter.Server.CommandService
         {
             TrInfo output = new TrInfo 
             {
-                Port = Program.Port,
                 ServerName = Config.Data.ServerName,
                 ServerVersion = Config.Data.ServerVersion,
                 Time = DateTime.Now,
