@@ -15,7 +15,7 @@ namespace Chatter.AdminPanel.Commands
         public CmdInfo(string name) : base(name) { }
         public override bool Execute(string text)
         {
-            TransferInfo data = JsonConvert.DeserializeObject<TransferInfo>(Program._Client.WriteLineAndGetReply("info\n" + Program.Token +"\n", TimeSpan.FromSeconds(300)).MessageString);
+            TrInfo data = JsonConvert.DeserializeObject<TrInfo>(Program._Client.WriteLineAndGetReply("info\n" + Program.Token +"\n", TimeSpan.FromSeconds(300)).MessageString);
             Console.WriteLine("Client Username: " + data.Username);
             Console.WriteLine("Server: " + data.ServerName + "/" + data.ServerVersion);
             Console.WriteLine("Server Prot: " + data.Port);

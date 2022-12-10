@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chatter.Server.Transfer
 {
-    public class TransferInfo
+    public class TrInfo
     {
         public string Username { get; set; }
         public DateTime Time { get; set; }

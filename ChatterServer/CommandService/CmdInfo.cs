@@ -14,7 +14,7 @@ namespace Chatter.Server.CommandService
         public CmdInfo(string name) : base(name) { }
         public override string Execute(string text, User user)
         {
-            TransferInfo output = new TransferInfo 
+            TrInfo output = new TrInfo 
             {
                 Port = Program.Port,
                 ServerName = Config.Data.ServerName,

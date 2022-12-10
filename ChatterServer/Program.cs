@@ -38,7 +38,6 @@ namespace Chatter.Server
 			Init();
 			StartCommmandLisener();
 		}
-
 		private static void StartCommmandLisener()
 		{
 			while (Working)
@@ -48,10 +47,10 @@ namespace Chatter.Server
 				{
 					MsgHandeler.Save();
 					UserHandeler.Save();
+					server.Stop();
 					return;
 				}
-				CommandHandeler.Run(input);
-				server.Stop();
+				//CommandHandeler.Run(input);
 			}
 		}
 		private static void Init()

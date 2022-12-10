@@ -14,7 +14,7 @@ namespace Chatter.Server.CommandService
         public CmdLogin(string name) : base(name) { }
         public override string Execute(string text, User user)
         {
-            TransferLogin data = JsonConvert.DeserializeObject<TransferLogin>(text);
+            TrLogin data = JsonConvert.DeserializeObject<TrLogin>(text);
             if (data == null)
             {
                 return "0";

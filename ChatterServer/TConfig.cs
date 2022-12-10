@@ -10,6 +10,8 @@ namespace Chatter.Server
     {
         public string ServerName { get; set; }
         public string ServerVersion { get; set; }
+        public string UserBaseFile { get; set; }
+        public string Messagebase { get; set; }
         public TConfig() { }
     }
 }

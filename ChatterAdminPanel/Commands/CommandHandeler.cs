@@ -14,6 +14,7 @@ namespace Chatter.AdminPanel.Commands
             commands = new List<Command>
             {
                 new CmdInfo("info"),
+                new CmdAnoucment("anoucment"),
             };
         }
         public static bool Run(string input)
@@ -22,7 +23,8 @@ namespace Chatter.AdminPanel.Commands
             {
                 if (input.ToLower().StartsWith(item.Name))
                 {
-                    return item.Execute(input);
+                    string data = input.ToArray().Skip(item.Name.Length + 1).ToString();
+                    return item.Execute(data);
                 }
             }
             return false;
