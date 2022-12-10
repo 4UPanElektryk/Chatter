@@ -55,6 +55,7 @@
     <Compile Include="CommandService\CmdAdminLogin.cs" />
     <Compile Include="CommandService\CmdCheckToken.cs" />
     <Compile Include="CommandService\CmdDrop.cs" />
+    <Compile Include="CommandService\CmdGetMsgs.cs" />
     <Compile Include="CommandService\CmdInfo.cs" />
     <Compile Include="CommandService\CmdLogin.cs" />
     <Compile Include="CommandService\Command.cs" />

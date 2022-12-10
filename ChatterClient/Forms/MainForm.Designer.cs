@@ -1,4 +1,4 @@
-﻿namespace ChatterClient
+﻿namespace Chatter.Client
 {
     partial class MainForm
     {
@@ -66,6 +66,7 @@
             this.newPostToolStripMenuItem.Name = "newPostToolStripMenuItem";
             this.newPostToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.newPostToolStripMenuItem.Text = "New Post";
+            this.newPostToolStripMenuItem.Click += new System.EventHandler(this.newPostToolStripMenuItem_Click);
             // 
             // userToolStripMenuItem
             // 
@@ -78,7 +79,6 @@
             this.userToolStripMenuItem.Name = "userToolStripMenuItem";
             this.userToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.userToolStripMenuItem.Text = "User";
-            this.userToolStripMenuItem.Click += new System.EventHandler(this.usernameToolStripMenuItem_Click);
             // 
             // changeColorToolStripMenuItem
             // 
@@ -119,7 +119,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Client";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

@@ -1,4 +1,4 @@
-﻿namespace ChatterClient
+﻿namespace Chatter.Client
 {
     partial class Connect_Form
     {
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.TBPassword = new System.Windows.Forms.TextBox();
+            this.TBAddress = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TBPort = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -44,13 +44,12 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Address:";
             // 
-            // TBPassword
+            // TBAddress
             // 
-            this.TBPassword.Location = new System.Drawing.Point(74, 12);
-            this.TBPassword.Name = "TBPassword";
-            this.TBPassword.PasswordChar = '*';
-            this.TBPassword.Size = new System.Drawing.Size(115, 20);
-            this.TBPassword.TabIndex = 5;
+            this.TBAddress.Location = new System.Drawing.Point(74, 12);
+            this.TBAddress.Name = "TBAddress";
+            this.TBAddress.Size = new System.Drawing.Size(115, 20);
+            this.TBAddress.TabIndex = 5;
             // 
             // label1
             // 
@@ -61,13 +60,12 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Port:";
             // 
-            // textBox1
+            // TBPort
             // 
-            this.textBox1.Location = new System.Drawing.Point(74, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PasswordChar = '*';
-            this.textBox1.Size = new System.Drawing.Size(115, 20);
-            this.textBox1.TabIndex = 7;
+            this.TBPort.Location = new System.Drawing.Point(74, 38);
+            this.TBPort.Name = "TBPort";
+            this.TBPort.Size = new System.Drawing.Size(115, 20);
+            this.TBPort.TabIndex = 7;
             // 
             // button1
             // 
@@ -77,6 +75,7 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "Connect";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Connect_Form
             // 
@@ -85,9 +84,10 @@
             this.ClientSize = new System.Drawing.Size(286, 72);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TBPort);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.TBPassword);
+            this.Controls.Add(this.TBAddress);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Connect_Form";
             this.Text = "Connect to Server";
             this.ResumeLayout(false);
@@ -98,9 +98,9 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TBPassword;
+        private System.Windows.Forms.TextBox TBAddress;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TBPort;
         private System.Windows.Forms.Button button1;
     }
 }

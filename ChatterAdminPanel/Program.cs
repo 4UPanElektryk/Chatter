@@ -31,6 +31,24 @@ namespace Chatter.AdminPanel
                 Delimiter = (byte)'\n',
             };
         }
+        static void ShowErr(string error)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            switch (error)
+            {
+                case "E-TKN":
+                    Console.WriteLine("Token Error");
+                    break;
+                case "E-DAT":
+                    Console.WriteLine("Sent Data Error");
+                    break;
+                default:
+                    Console.WriteLine("Un Expected Error");
+                    break;
+            }
+            Console.WriteLine("Error Code: " + error);
+            Console.ResetColor();
+        }
 		static void Connect()
 		{
             while (true)
@@ -48,6 +66,7 @@ namespace Chatter.AdminPanel
                     else
                     {
                         port = int.Parse(address.Split(':')[1]);
+                        address = address.Split(':')[0];
                         Console.WriteLine(port);
                     }
                     _Client.Connect(address, port);

@@ -15,6 +15,8 @@ namespace Chatter.Server.CommandService
                 new CmdLogin("login"),
                 new CmdDrop("drop"),
                 new CmdInfo("info"),
+                new CmdCheckToken("checktoken"),
+                new CmdAddMsg("addmsg")
             };
         }
         public static string Run(string input)
@@ -30,8 +32,7 @@ namespace Chatter.Server.CommandService
                     return item.Execute(data,user);
                 }
             }
-            string output = " ";
-            return output;
+            return "";
         }
     }
 }

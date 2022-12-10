@@ -8,29 +8,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ChatterClient
+namespace Chatter.Client
 {
     public partial class MainForm : Form
     {
         public string TOKEN;
+        public bool connected;
         public MainForm()
         {
             InitializeComponent();
+            connected = false;
+            TOKEN = string.Empty;
         }
-
-        private void MainForm_Load(object sender, EventArgs e)
+        public void LogedIn()
         {
-
+            newPostToolStripMenuItem.Enabled = true;
+            copyUserTokenToClipboardToolStripMenuItem.Enabled = true;
+            loginToolStripMenuItem.Text = "Logout";
         }
-
-        private void NewPost_Click(object sender, EventArgs e)
+        public void Logout()
         {
-
-        }
-
-        private void usernameToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
+            newPostToolStripMenuItem.Enabled = false;
+            copyUserTokenToClipboardToolStripMenuItem.Enabled = false;
+            loginToolStripMenuItem.Text = "Login";
+            TOKEN= string.Empty;
         }
 
         private void copyUserTokenToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -40,9 +41,36 @@ namespace ChatterClient
 
         private void loginToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoginForm form = new LoginForm();
-            form.ShowDialog();
-            TOKEN = form.Token;
+            if (!connected)
+            {
+                Connect_Form form = new Connect_Form();
+                form.ShowDialog();
+                if (form.failed)
+                {
+                    return;
+                }
+                connected = true;
+            }
+
+            if (TOKEN == string.Empty)
+            {
+                LoginForm form = new LoginForm();
+                form.ShowDialog();
+                if (form.Token != string.Empty)
+                {
+                    TOKEN = form.Token;
+                    LogedIn();
+                }
+            }
+            else
+            {
+                Logout();
+            }
+        }
+
+        private void newPostToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new NewMsgForm(this).Show();
         }
     }
 }
