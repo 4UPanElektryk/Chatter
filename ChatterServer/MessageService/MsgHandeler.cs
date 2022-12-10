@@ -31,6 +31,19 @@ namespace Chatter.Server.MessageService
             Log.Write("Saving Message database to: " + Path, EType.Informtion);
             File.WriteAllText(Path,JsonConvert.SerializeObject(msgs,Formatting.Indented));
         }
+        public static List<Msg> GetLastSeveral(int num)
+        {
+            if (msgs.Count <= num)
+            {
+                return msgs;
+            }
+            List<Msg> Cutdown = new List<Msg>();
+            for (int i = msgs.Count; i > msgs.Count - (num + 1); i--)
+            {
+                Cutdown.Add(msgs[i]);
+            }
+            return Cutdown;
+        }
         public static void AddMsg(Msg msg)
         {
             msg._Sent = DateTime.UtcNow;

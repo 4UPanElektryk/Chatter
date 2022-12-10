@@ -69,7 +69,7 @@ namespace Chatter.Server
 				Log.Write("Server Started on " + Config.Data.ServerIPAddress + ":" + Config.Data.ServerPort, EType.Informtion);
 			}
 		}
-		#region Clinet
+		#region Client
 		private static void Server_ClientDisconnected(object sender, TcpClient e)
 		{
 			Log.Write("Client Has Disconnected", EType.Informtion);
