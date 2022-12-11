@@ -1,12 +1,11 @@
-﻿using Chatter.Server.MessageService;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chatter.Server.Transfer
+namespace Chatter.Client.Transfer
 {
     public class TrGetMsgs
     {

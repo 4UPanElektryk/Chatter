@@ -16,7 +16,8 @@ namespace Chatter.Server.CommandService
                 new CmdDrop("drop"),
                 new CmdInfo("info"),
                 new CmdCheckToken("checktoken"),
-                new CmdAddMsg("addmsg")
+                new CmdAddMsg("addmsg"),
+                new CmdGetMsgs("getmsgs")
             };
         }
         public static string Run(string input)

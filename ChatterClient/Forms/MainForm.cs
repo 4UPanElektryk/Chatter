@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Chatter.Client.Transfer;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +28,23 @@ namespace Chatter.Client
             newPostToolStripMenuItem.Enabled = true;
             copyUserTokenToClipboardToolStripMenuItem.Enabled = true;
             loginToolStripMenuItem.Text = "Logout";
+            if (GetMsgs() != null)
+            {
+                MessageBox.Show("LOADES");
+                richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
+            }
+        }
+        public List<UMsg> GetMsgs()
+        {
+            SimpleTCP.Message reply = Program._Client.WriteLineAndGetReply("getmsgs\n"+ TOKEN + "\n", TimeSpan.FromSeconds(20));
+            try
+            {
+                return JsonConvert.DeserializeObject<TrGetMsgs>(reply.MessageString).msgs;
+            }
+            catch
+            {
+                return null;
+            }
         }
         public void Logout()
         {
