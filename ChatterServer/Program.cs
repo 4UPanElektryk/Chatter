@@ -19,7 +19,7 @@ namespace Chatter.Server
 {
 	public class Program
 	{
-		static SimpleTcpServer server;
+		public static SimpleTcpServer server;
 		public static List<TcpClient> Clients;
 		public static bool Working = true;
 		static void Main(string[] args)
@@ -87,6 +87,6 @@ namespace Chatter.Server
 			string reply = CommandHandeler.Run(e.MessageString);
 			Log.Write(reply);
 			e.ReplyLine(reply);
-		}
+        }
 	}
 }

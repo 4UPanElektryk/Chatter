@@ -38,6 +38,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 15);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(48, 13);
@@ -46,6 +47,9 @@
             // 
             // TBAddress
             // 
+            this.TBAddress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.TBAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TBAddress.ForeColor = System.Drawing.Color.White;
             this.TBAddress.Location = new System.Drawing.Point(74, 12);
             this.TBAddress.Name = "TBAddress";
             this.TBAddress.Size = new System.Drawing.Size(115, 20);
@@ -54,6 +58,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(12, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 13);
@@ -62,6 +67,9 @@
             // 
             // TBPort
             // 
+            this.TBPort.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.TBPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TBPort.ForeColor = System.Drawing.Color.White;
             this.TBPort.Location = new System.Drawing.Point(74, 38);
             this.TBPort.Name = "TBPort";
             this.TBPort.Size = new System.Drawing.Size(115, 20);
@@ -69,18 +77,22 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(195, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 46);
             this.button1.TabIndex = 8;
             this.button1.Text = "Connect";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Connect_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(286, 72);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);

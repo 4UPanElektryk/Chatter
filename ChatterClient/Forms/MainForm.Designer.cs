@@ -36,24 +36,29 @@
             this.copyUserTokenToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changePasswordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBox1.Location = new System.Drawing.Point(12, 28);
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.ForeColor = System.Drawing.Color.White;
+            this.richTextBox1.Location = new System.Drawing.Point(-7, 29);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(455, 364);
+            this.richTextBox1.Size = new System.Drawing.Size(486, 374);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newPostToolStripMenuItem,
-            this.userToolStripMenuItem});
+            this.userToolStripMenuItem,
+            this.refreshToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(479, 24);
@@ -63,6 +68,7 @@
             // newPostToolStripMenuItem
             // 
             this.newPostToolStripMenuItem.Enabled = false;
+            this.newPostToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.newPostToolStripMenuItem.Name = "newPostToolStripMenuItem";
             this.newPostToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.newPostToolStripMenuItem.Text = "New Post";
@@ -76,20 +82,25 @@
             this.copyUserTokenToClipboardToolStripMenuItem,
             this.changePasswordToolStripMenuItem,
             this.loginToolStripMenuItem});
+            this.userToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.userToolStripMenuItem.Name = "userToolStripMenuItem";
             this.userToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
             this.userToolStripMenuItem.Text = "User";
             // 
             // changeColorToolStripMenuItem
             // 
+            this.changeColorToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.changeColorToolStripMenuItem.Enabled = false;
+            this.changeColorToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.changeColorToolStripMenuItem.Name = "changeColorToolStripMenuItem";
             this.changeColorToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.changeColorToolStripMenuItem.Text = "Change Color";
             // 
             // copyUserTokenToClipboardToolStripMenuItem
             // 
+            this.copyUserTokenToClipboardToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.copyUserTokenToClipboardToolStripMenuItem.Enabled = false;
+            this.copyUserTokenToClipboardToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.copyUserTokenToClipboardToolStripMenuItem.Name = "copyUserTokenToClipboardToolStripMenuItem";
             this.copyUserTokenToClipboardToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.copyUserTokenToClipboardToolStripMenuItem.Text = "Copy User Token to Clipboard";
@@ -97,22 +108,36 @@
             // 
             // changePasswordToolStripMenuItem
             // 
+            this.changePasswordToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.changePasswordToolStripMenuItem.Enabled = false;
+            this.changePasswordToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
             this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.changePasswordToolStripMenuItem.Text = "Change Password";
             // 
             // loginToolStripMenuItem
             // 
+            this.loginToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            this.loginToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
             this.loginToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.loginToolStripMenuItem.Text = "Login";
             this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
             // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Enabled = false;
+            this.refreshToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(479, 404);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.menuStrip1);
@@ -136,6 +161,7 @@
         private System.Windows.Forms.ToolStripMenuItem copyUserTokenToClipboardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
     }
 }
 

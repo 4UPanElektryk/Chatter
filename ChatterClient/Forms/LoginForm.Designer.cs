@@ -60,6 +60,9 @@
             // 
             // TBLogin
             // 
+            this.TBLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.TBLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TBLogin.ForeColor = System.Drawing.Color.White;
             this.TBLogin.Location = new System.Drawing.Point(68, 19);
             this.TBLogin.Name = "TBLogin";
             this.TBLogin.Size = new System.Drawing.Size(115, 20);
@@ -67,6 +70,9 @@
             // 
             // TBPassword
             // 
+            this.TBPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.TBPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TBPassword.ForeColor = System.Drawing.Color.White;
             this.TBPassword.Location = new System.Drawing.Point(68, 45);
             this.TBPassword.Name = "TBPassword";
             this.TBPassword.PasswordChar = '*';
@@ -75,16 +81,21 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Location = new System.Drawing.Point(207, 17);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 70);
             this.button1.TabIndex = 4;
             this.button1.Text = "Login";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // TBToken
             // 
+            this.TBToken.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(26)))), ((int)(((byte)(26)))));
+            this.TBToken.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TBToken.ForeColor = System.Drawing.Color.White;
             this.TBToken.Location = new System.Drawing.Point(6, 19);
             this.TBToken.Name = "TBToken";
             this.TBToken.PasswordChar = '*';
@@ -94,6 +105,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.TBToken);
+            this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(12, 93);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(275, 48);
@@ -107,6 +119,7 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.TBLogin);
             this.groupBox2.Controls.Add(this.TBPassword);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(12, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(189, 75);
@@ -118,10 +131,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
             this.ClientSize = new System.Drawing.Size(300, 150);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button1);
+            this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "LoginForm";
             this.Text = "Login";

@@ -19,6 +19,7 @@ namespace Chatter.Client
         public LoginForm()
         {
             InitializeComponent();
+            Token = string.Empty;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -27,6 +28,11 @@ namespace Chatter.Client
             if (token != "")
             {
                 SimpleTCP.Message reply = Program._Client.WriteLineAndGetReply("checktoken\n0\n" + token, TimeSpan.FromSeconds(20));
+                if (reply == null)
+                {
+                    Token = string.Empty;
+                    this.Close();
+                }
                 if (bool.Parse(reply.MessageString))
                 {
                     Token = reply.MessageString;
@@ -49,6 +55,16 @@ namespace Chatter.Client
                         Token = reply.MessageString;
                         this.Close();
                     }
+                    else
+                    {
+                        Token = string.Empty;
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    Token = string.Empty;
+                    this.Close();
                 }
             }
         }

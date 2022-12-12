@@ -23,6 +23,7 @@ namespace Chatter.Client
             connected = false;
             TOKEN = string.Empty;
         }
+
         public void LogedIn()
         {
             newPostToolStripMenuItem.Enabled = true;
@@ -30,7 +31,6 @@ namespace Chatter.Client
             loginToolStripMenuItem.Text = "Logout";
             if (GetMsgs() != null)
             {
-                MessageBox.Show("LOADES");
                 richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
             }
         }
@@ -86,11 +86,17 @@ namespace Chatter.Client
             {
                 Logout();
             }
+            refreshToolStripMenuItem.Enabled = connected;
         }
 
         private void newPostToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new NewMsgForm(this).Show();
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
         }
     }
 }

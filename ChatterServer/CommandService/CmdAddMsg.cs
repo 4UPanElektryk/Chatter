@@ -31,6 +31,7 @@ namespace Chatter.Server.CommandService
                 _UserID = user._Id,
             };
             MsgHandeler.AddMsg(msg);
+            
             return "OK";
         }
     }
