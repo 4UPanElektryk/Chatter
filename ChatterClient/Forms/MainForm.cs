@@ -98,5 +98,10 @@ namespace Chatter.Client
         {
             richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
         }
+
+        private void MainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            richTextBox1.Size = new Size(this.Size.Width - 16, this.Size.Height - 64);
+        }
     }
 }
