@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CoolConsole.MenuItems;
-using CoolConsole;
 using System.Net;
 using Chatter.Server.UserService;
 using Chatter.Server.MessageService;
