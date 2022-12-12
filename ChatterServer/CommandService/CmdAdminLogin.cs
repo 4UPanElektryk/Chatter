@@ -1,6 +1,6 @@
-﻿using Chatter.Server.UserService;
+﻿using Chatter.Server.Transfer;
+using Chatter.Server.UserService;
 using Newtonsoft.Json;
-using Chatter.Server.Transfer;
 
 namespace Chatter.Server.CommandService
 {

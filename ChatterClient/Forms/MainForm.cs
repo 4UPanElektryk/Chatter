@@ -1,14 +1,7 @@
 ﻿using Chatter.Client.Transfer;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chatter.Client
@@ -23,7 +16,6 @@ namespace Chatter.Client
             connected = false;
             TOKEN = string.Empty;
         }
-
         public void LogedIn()
         {
             newPostToolStripMenuItem.Enabled = true;
@@ -31,12 +23,13 @@ namespace Chatter.Client
             loginToolStripMenuItem.Text = "Logout";
             if (GetMsgs() != null)
             {
+                MessageBox.Show("LOADES");
                 richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
             }
         }
         public List<UMsg> GetMsgs()
         {
-            SimpleTCP.Message reply = Program._Client.WriteLineAndGetReply("getmsgs\n"+ TOKEN + "\n", TimeSpan.FromSeconds(20));
+            SimpleTCP.Message reply = Program._Client.WriteLineAndGetReply("getmsgs\n" + TOKEN + "\n", TimeSpan.FromSeconds(20));
             try
             {
                 return JsonConvert.DeserializeObject<TrGetMsgs>(reply.MessageString).msgs;
@@ -51,7 +44,7 @@ namespace Chatter.Client
             newPostToolStripMenuItem.Enabled = false;
             copyUserTokenToClipboardToolStripMenuItem.Enabled = false;
             loginToolStripMenuItem.Text = "Login";
-            TOKEN= string.Empty;
+            TOKEN = string.Empty;
         }
 
         private void copyUserTokenToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,22 +79,11 @@ namespace Chatter.Client
             {
                 Logout();
             }
-            refreshToolStripMenuItem.Enabled = connected;
         }
 
         private void newPostToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new NewMsgForm(this).Show();
-        }
-
-        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
-        }
-
-        private void MainForm_ResizeEnd(object sender, EventArgs e)
-        {
-            richTextBox1.Size = new Size(this.Size.Width - 16, this.Size.Height - 64);
         }
     }
 }

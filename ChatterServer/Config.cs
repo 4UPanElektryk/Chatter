@@ -1,10 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chatter.Server
 {
@@ -12,7 +7,7 @@ namespace Chatter.Server
     {
         public static string Path;
         public static TConfig Data;
-        public Config(string path) 
+        public Config(string path)
         {
             Path = path;
         }
@@ -38,7 +33,7 @@ namespace Chatter.Server
         }
         public static void Save()
         {
-            File.WriteAllText(Path,JsonConvert.SerializeObject(Data,Formatting.Indented));
+            File.WriteAllText(Path, JsonConvert.SerializeObject(Data, Formatting.Indented));
         }
     }
 }

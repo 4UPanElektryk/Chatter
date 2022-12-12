@@ -1,12 +1,6 @@
 ﻿using Chatter.AdminPanel.Transfer;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using SimpleTCP;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chatter.AdminPanel.Commands
 {
@@ -15,7 +9,7 @@ namespace Chatter.AdminPanel.Commands
         public CmdInfo(string name) : base(name) { }
         public override bool Execute(string text)
         {
-            TrInfo data = JsonConvert.DeserializeObject<TrInfo>(Program._Client.WriteLineAndGetReply("info\n" + Program.Token +"\n", TimeSpan.FromSeconds(300)).MessageString);
+            TrInfo data = JsonConvert.DeserializeObject<TrInfo>(Program._Client.WriteLineAndGetReply("info\n" + Program.Token + "\n", TimeSpan.FromSeconds(300)).MessageString);
             Console.WriteLine("Client Username: " + data.Username);
             Console.WriteLine("Server: " + data.ServerName + "/" + data.ServerVersion);
             Console.WriteLine("Server Address: " + Program.Address + ":" + Program.Port);

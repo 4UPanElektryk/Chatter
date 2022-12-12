@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Chatter.Server.UserService;
+using System;
 using System.Collections.Generic;
-using Chatter.Server.UserService;
 
 namespace Chatter.Server.CommandService
 {
@@ -22,7 +22,7 @@ namespace Chatter.Server.CommandService
         }
         public static string Run(string input)
         {
-            string[] s = input.Split(new string[] { "\r\n", "\r", "\n" },StringSplitOptions.None);
+            string[] s = input.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
             string name = s[0];
             User user = TokenHandeler.GetUser(s[1]);
             string data = s[2];
@@ -30,7 +30,7 @@ namespace Chatter.Server.CommandService
             {
                 if (name.ToLower().StartsWith(item.Name))
                 {
-                    return item.Execute(data,user);
+                    return item.Execute(data, user);
                 }
             }
             return "";

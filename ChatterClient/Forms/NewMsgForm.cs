@@ -1,15 +1,7 @@
-﻿using System;
-using Chatter.Client.Transfer;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using SimpleTCP;
+﻿using Chatter.Client.Transfer;
 using Newtonsoft.Json;
+using System;
+using System.Windows.Forms;
 
 namespace Chatter.Client
 {
@@ -34,7 +26,7 @@ namespace Chatter.Client
             }
             else
             {
-                MessageBox.Show("Message sending error\n"+response.MessageString);
+                MessageBox.Show("Message sending error\n" + response.MessageString);
             }
         }
     }
