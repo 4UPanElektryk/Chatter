@@ -73,5 +73,16 @@ namespace Chatter.Server.UserService
 			users.ForEach(user => { if (user._Id >= id) { id = user._Id + 1; } });
 			return id;
 		}
+		public static bool LoginInUse(string login)
+		{
+			foreach (User item in users)
+			{
+				if (item._Name == login)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 }
