@@ -8,7 +8,7 @@ namespace Chatter.Server.CommandService
         {
             Name = name;
         }
-        public virtual string Execute(string text,User user)
+        public virtual string Execute(string text, User user)
         {
             return "";
         }

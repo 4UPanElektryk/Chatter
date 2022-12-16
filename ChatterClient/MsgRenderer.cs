@@ -1,11 +1,7 @@
-﻿using System;
+﻿using Chatter.Client.Transfer;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Chatter.Client.Transfer;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Chatter.Client
 {
@@ -13,6 +9,11 @@ namespace Chatter.Client
     {
         public static RichTextBox RederMsgs(RichTextBox textBox, List<UMsg> msgs)
         {
+            if (msgs == null)
+            {
+                return textBox;
+            }
+            #region Rendering Text
             textBox.Text = "";
             List<Loc> collocs = new List<Loc>();
             foreach (UMsg item in msgs)
@@ -29,12 +30,15 @@ namespace Chatter.Client
                     color = item._Color,
                 });
             }
+            #endregion
+            #region Rendering Color
             foreach (Loc item in collocs)
             {
                 textBox.Select(item.start_index, item.length);
                 textBox.SelectionColor = item.color;
             }
             textBox.Select(textBox.Text.Length, 0);
+            #endregion
             return textBox;
         }
     }

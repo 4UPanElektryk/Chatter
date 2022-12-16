@@ -2,12 +2,6 @@
 using Chatter.Server.Transfer;
 using Chatter.Server.UserService;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chatter.Server.CommandService
 {
@@ -31,7 +25,7 @@ namespace Chatter.Server.CommandService
                 _UserID = user._Id,
             };
             MsgHandeler.AddMsg(msg);
-            
+
             return "OK";
         }
     }

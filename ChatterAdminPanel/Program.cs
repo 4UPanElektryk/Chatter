@@ -1,28 +1,28 @@
-﻿using SimpleTCP;
+﻿using Chatter.AdminPanel.Commands;
+using Chatter.AdminPanel.Transfer;
+using Newtonsoft.Json;
+using SimpleTCP;
 using System;
 using System.Text;
-using Newtonsoft.Json;
-using Chatter.AdminPanel.Transfer;
-using Chatter.AdminPanel.Commands;
 
 namespace Chatter.AdminPanel
 {
-	public class Program
-	{
-		public static SimpleTcpClient _Client;
+    public class Program
+    {
+        public static SimpleTcpClient _Client;
         public static string Token = string.Empty;
         public static string Address = string.Empty;
         public static int Port = 0;
-		static void Main(string[] args)
-		{
+        static void Main(string[] args)
+        {
             Init();
             Connect();
             Login();
-			Console.WriteLine("Your Logged In");
+            Console.WriteLine("Your Logged In");
             MainLoop();
         }
-		static void Init()
-		{
+        static void Init()
+        {
             new CommandHandeler();
             _Client = new SimpleTcpClient
             {
@@ -52,8 +52,8 @@ namespace Chatter.AdminPanel
             Console.WriteLine("Error Code: " + error);
             Console.ResetColor();
         }
-		static void Connect()
-		{
+        static void Connect()
+        {
             while (true)
             {
                 Console.Write("Address >");
@@ -86,8 +86,8 @@ namespace Chatter.AdminPanel
             }
             Console.WriteLine("Connected Succesfully");
         }
-		static void Login()
-		{
+        static void Login()
+        {
             do
             {
                 Console.Write("Login >");

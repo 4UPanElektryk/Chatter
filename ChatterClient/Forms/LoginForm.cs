@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Chatter.Client.Transfer;
+﻿using Chatter.Client.Transfer;
 using Newtonsoft.Json;
+using System;
+using System.Windows.Forms;
 
 namespace Chatter.Client
 {
@@ -19,20 +11,14 @@ namespace Chatter.Client
         public LoginForm()
         {
             InitializeComponent();
-            Token = string.Empty;
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            string login = TBLogin.Text;string password = TBPassword.Text;string token = TBToken.Text;
-            TBLogin.Text = "";TBPassword.Text = ""; TBToken.Text = "";
+            string login = TBLogin.Text; string password = TBPassword.Text; string token = TBToken.Text;
+            TBLogin.Text = ""; TBPassword.Text = ""; TBToken.Text = "";
             if (token != "")
             {
                 SimpleTCP.Message reply = Program._Client.WriteLineAndGetReply("checktoken\n0\n" + token, TimeSpan.FromSeconds(20));
-                if (reply == null)
-                {
-                    Token = string.Empty;
-                    this.Close();
-                }
                 if (bool.Parse(reply.MessageString))
                 {
                     Token = reply.MessageString;
@@ -55,16 +41,6 @@ namespace Chatter.Client
                         Token = reply.MessageString;
                         this.Close();
                     }
-                    else
-                    {
-                        Token = string.Empty;
-                        this.Close();
-                    }
-                }
-                else
-                {
-                    Token = string.Empty;
-                    this.Close();
                 }
             }
         }

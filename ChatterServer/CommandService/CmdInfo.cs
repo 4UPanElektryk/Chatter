@@ -1,11 +1,7 @@
-﻿using Chatter.Server.UserService;
-using Chatter.Server.Transfer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Chatter.Server.Transfer;
+using Chatter.Server.UserService;
 using Newtonsoft.Json;
+using System;
 
 namespace Chatter.Server.CommandService
 {
@@ -14,7 +10,7 @@ namespace Chatter.Server.CommandService
         public CmdInfo(string name) : base(name) { }
         public override string Execute(string text, User user)
         {
-            TrInfo output = new TrInfo 
+            TrInfo output = new TrInfo
             {
                 ServerName = Config.Data.ServerName,
                 ServerVersion = Config.Data.ServerVersion,

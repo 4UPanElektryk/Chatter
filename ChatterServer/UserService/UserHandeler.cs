@@ -1,57 +1,57 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using SimpleLogs4Net;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using Newtonsoft.Json;
-using SimpleLogs4Net;
 
 namespace Chatter.Server.UserService
 {
-	public class UserHandeler
-	{
-		public static List<User> users;
-		public static string Path;
-		public UserHandeler(string path) 
-		{
-			users = new List<User>();
-			Path = path;
-			Load();
-		}
-		public static void Load()
-		{
-			if (!File.Exists(Path))
+    public class UserHandeler
+    {
+        public static List<User> users;
+        public static string Path;
+        public UserHandeler(string path)
+        {
+            users = new List<User>();
+            Path = path;
+            Load();
+        }
+        public static void Load()
+        {
+            if (!File.Exists(Path))
             {
                 Log.Write("User Database file missing: " + Path, EType.Warning);
                 User admin = new User
-				{
-					_Id = 0,
-					_Name = "ADMIN",
-					_IsAdmin = true,
-					_TextColor = Color.Red,
-					_Password = "01234567"
-				};
-				users.Add(admin);
-				Save();
-				return;
-			}
+                {
+                    _Id = 0,
+                    _Name = "ADMIN",
+                    _IsAdmin = true,
+                    _TextColor = Color.Red,
+                    _Password = "01234567"
+                };
+                users.Add(admin);
+                Save();
+                return;
+            }
             Log.Write("Loading User database from: " + Path, EType.Informtion);
             users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(Path));
-		}
-		public static void Save() 
-		{
+        }
+        public static void Save()
+        {
             Log.Write("Saving User database to: " + Path, EType.Informtion);
-            File.WriteAllText(Path,JsonConvert.SerializeObject(users,Formatting.Indented));
-		}
-		public static User GetUser(int id)
-		{
-			foreach (User user in users)
-			{
-				if (user._Id == id)
-				{
-					return user;
-				}
-			}
-			return null;
-		}
+            File.WriteAllText(Path, JsonConvert.SerializeObject(users, Formatting.Indented));
+        }
+        public static User GetUser(int id)
+        {
+            foreach (User user in users)
+            {
+                if (user._Id == id)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
         public static User GetUser(string Login, string Password)
         {
             foreach (User user in users)

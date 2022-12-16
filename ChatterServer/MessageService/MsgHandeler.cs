@@ -29,7 +29,7 @@ namespace Chatter.Server.MessageService
         public static void Save()
         {
             Log.Write("Saving Message database to: " + Path, EType.Informtion);
-            File.WriteAllText(Path,JsonConvert.SerializeObject(msgs,Formatting.Indented));
+            File.WriteAllText(Path, JsonConvert.SerializeObject(msgs, Formatting.Indented));
         }
         public static List<Msg> GetLastSeveral(int num)
         {
