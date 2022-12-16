@@ -42,14 +42,19 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CmdAddUser.cs" />
     <Compile Include="Commands\CmdAnoucment.cs" />
+    <Compile Include="Commands\CmdGetUsers.cs" />
     <Compile Include="Commands\CmdInfo.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\CommandHandeler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transfer\TrAddUser.cs" />
+    <Compile Include="Transfer\TrGetUsers.cs" />
     <Compile Include="Transfer\TrInfo.cs" />
     <Compile Include="Transfer\TrLogin.cs" />
   </ItemGroup>

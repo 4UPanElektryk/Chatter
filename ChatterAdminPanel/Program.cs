@@ -31,7 +31,7 @@ namespace Chatter.AdminPanel
                 Delimiter = (byte)'\n',
             };
         }
-        static void ShowErr(string error)
+        public static void ShowErr(string error)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             switch (error)
@@ -41,6 +41,9 @@ namespace Chatter.AdminPanel
                     break;
                 case "E-DAT":
                     Console.WriteLine("Sent Data Error");
+                    break;
+                case "E-NAM":
+                    Console.WriteLine("Name already in Use");
                     break;
                 default:
                     Console.WriteLine("Un Expected Error");

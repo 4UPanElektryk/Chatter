@@ -15,6 +15,7 @@ namespace Chatter.Server.CommandService
         public override string Execute(string text, User user)
         {
             TrGetUsers tr = new TrGetUsers();
+            tr.users = new List<TrUser>();
             foreach (User item in UserHandeler.users)
             {
                 TrUser tr1 = new TrUser

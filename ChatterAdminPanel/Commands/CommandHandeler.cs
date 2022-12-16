@@ -15,6 +15,8 @@ namespace Chatter.AdminPanel.Commands
             {
                 new CmdInfo("info"),
                 new CmdAnoucment("anoucment"),
+                new CmdAddUser("adduser"),
+                new CmdGetUsers("getusers")
             };
         }
         public static bool Run(string input)
