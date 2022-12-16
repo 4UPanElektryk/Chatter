@@ -13,11 +13,12 @@ namespace Chatter.Server.CommandService
             {
                 new CmdAdminLogin("adminlogin"),
                 new CmdLogin("login"),
-                new CmdDrop("drop"),
                 new CmdInfo("info"),
                 new CmdCheckToken("checktoken"),
                 new CmdAddMsg("addmsg"),
-                new CmdGetMsgs("getmsgs")
+                new CmdGetMsgs("getmsgs"),
+                new CmdAddUser("adduser"),
+                new CmdGetUsers("getusers"),
             };
         }
         public static string Run(string input)

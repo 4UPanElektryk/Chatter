@@ -64,14 +64,25 @@ namespace Chatter.Server.UserService
             return null;
         }
         public static void AddUser(User user)
-        {
-            users.Add(user);
-        }
-        public static int GetNewId()
-        {
-            int id = 0;
-            users.ForEach(user => { if (user._Id >= id) { id = user._Id + 1; } });
-            return id;
-        }
-    }
+		{
+			users.Add(user);
+		}
+		public static int GetNewId() 
+		{
+			int id = 0;
+			users.ForEach(user => { if (user._Id >= id) { id = user._Id + 1; } });
+			return id;
+		}
+		public static bool LoginInUse(string login)
+		{
+			foreach (User item in users)
+			{
+				if (item._Name == login)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+	}
 }
