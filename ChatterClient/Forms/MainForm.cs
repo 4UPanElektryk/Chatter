@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Chatter.Client
@@ -21,11 +22,7 @@ namespace Chatter.Client
             newPostToolStripMenuItem.Enabled = true;
             copyUserTokenToClipboardToolStripMenuItem.Enabled = true;
             loginToolStripMenuItem.Text = "Logout";
-            if (GetMsgs() != null)
-            {
-                MessageBox.Show("LOADES");
-                richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
-            }
+            richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
         }
         public List<UMsg> GetMsgs()
         {
@@ -84,6 +81,14 @@ namespace Chatter.Client
         private void newPostToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new NewMsgForm(this).Show();
+        }
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
+        }
+        private void MainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            richTextBox1.Size = new Size(this.Size.Width - 16, this.Size.Height - 64);
         }
     }
 }

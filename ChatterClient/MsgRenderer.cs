@@ -9,6 +9,10 @@ namespace Chatter.Client
     {
         public static RichTextBox RederMsgs(RichTextBox textBox, List<UMsg> msgs)
         {
+            if (msgs == null)
+            {
+                return textBox;
+            }
             #region Rendering Text
             textBox.Text = "";
             List<Loc> collocs = new List<Loc>();
