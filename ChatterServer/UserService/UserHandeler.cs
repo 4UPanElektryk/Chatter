@@ -41,6 +41,22 @@ namespace Chatter.Server.UserService
             Log.Write("Saving User database to: " + Path, EType.Informtion);
             File.WriteAllText(Path, JsonConvert.SerializeObject(users, Formatting.Indented));
         }
+        public static void SetUserColor(Color color, int id)
+        {
+            User user = GetUser(id);
+            users.Remove(user);
+            user._TextColor = color;
+            users.Add(user);
+            Save();
+        }
+        public static void ChangePassword(string password, int id)
+        {
+            User user = GetUser(id);
+            users.Remove(user);
+            user._Password = password;
+            users.Add(user);
+            Save();
+        }
         public static User GetUser(int id)
         {
             foreach (User user in users)

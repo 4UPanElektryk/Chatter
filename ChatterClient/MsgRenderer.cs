@@ -16,11 +16,18 @@ namespace Chatter.Client
             #region Rendering Text
             textBox.Text = "";
             List<Loc> collocs = new List<Loc>();
+            List<Loc> Bolds = new List<Loc>();
             foreach (UMsg item in msgs)
             {
+                int prstart = textBox.Text.Length;
                 textBox.Text += item._Sent.ToString("dd.MM.yyyy HH:mm:ss") + "\n";
                 textBox.Text += item._UserName + "\n";
                 int start = textBox.Text.Length;
+                Bolds.Add(new Loc
+                {
+                    start_index = prstart,
+                    length = textBox.Text.Length - prstart,
+                });
                 textBox.Text += string.Join("\n", item._Message) + "\n";
                 int len = textBox.Text.Length - start;
                 collocs.Add(new Loc
@@ -37,6 +44,16 @@ namespace Chatter.Client
                 textBox.Select(item.start_index, item.length);
                 textBox.SelectionColor = item.color;
             }
+            #endregion
+            #region Rendering Bold
+            Font font = textBox.Font;
+            font = new Font(font,FontStyle.Bold);
+            foreach (Loc item in Bolds)
+            {
+                textBox.Select(item.start_index, item.length);
+                textBox.SelectionFont = font;
+            }
+            textBox.Select(textBox.Text.Length, 0);
             textBox.Select(textBox.Text.Length, 0);
             #endregion
             return textBox;

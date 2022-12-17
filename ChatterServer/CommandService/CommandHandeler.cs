@@ -19,6 +19,8 @@ namespace Chatter.Server.CommandService
                 new CmdGetMsgs("getmsgs"),
                 new CmdAddUser("adduser"),
                 new CmdGetUsers("getusers"),
+                new CmdSetColor("setcolor"),
+                new CmdSetPswd("setpswd")
             };
         }
         public static string Run(string input)

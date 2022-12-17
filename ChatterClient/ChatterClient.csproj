@@ -83,6 +83,7 @@
     <Compile Include="Transfer\TrAddMsg.cs" />
     <Compile Include="Transfer\TrGetMsgs.cs" />
     <Compile Include="Transfer\TrLogin.cs" />
+    <Compile Include="Transfer\TrSetColor.cs" />
     <EmbeddedResource Include="Forms\ConnectForm.resx">
       <DependentUpon>ConnectForm.cs</DependentUpon>
     </EmbeddedResource>

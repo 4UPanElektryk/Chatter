@@ -66,12 +66,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TConfig.cs" />
+    <Compile Include="CommandService\CmdSetColor.cs" />
     <Compile Include="Transfer\TrAddMsg.cs" />
     <Compile Include="Transfer\TrAddUser.cs" />
     <Compile Include="Transfer\TrGetMsgs.cs" />
     <Compile Include="Transfer\TrGetUsers.cs" />
     <Compile Include="Transfer\TrInfo.cs" />
     <Compile Include="Transfer\TrLogin.cs" />
+    <Compile Include="Transfer\TrSetColor.cs" />
+    <Compile Include="Transfer\TrSetPswd.cs" />
     <Compile Include="UserService\TokenHandeler.cs" />
     <Compile Include="UserService\User.cs" />
     <Compile Include="UserService\UserHandeler.cs" />

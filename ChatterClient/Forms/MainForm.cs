@@ -21,8 +21,17 @@ namespace Chatter.Client
         {
             newPostToolStripMenuItem.Enabled = true;
             copyUserTokenToClipboardToolStripMenuItem.Enabled = true;
+            changeColorToolStripMenuItem.Enabled = true;
             loginToolStripMenuItem.Text = "Logout";
             richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
+        }
+        public void Logout()
+        {
+            newPostToolStripMenuItem.Enabled = false;
+            copyUserTokenToClipboardToolStripMenuItem.Enabled = false;
+            changeColorToolStripMenuItem.Enabled = false;
+            loginToolStripMenuItem.Text = "Login";
+            TOKEN = string.Empty;
         }
         public List<UMsg> GetMsgs()
         {
@@ -35,13 +44,6 @@ namespace Chatter.Client
             {
                 return null;
             }
-        }
-        public void Logout()
-        {
-            newPostToolStripMenuItem.Enabled = false;
-            copyUserTokenToClipboardToolStripMenuItem.Enabled = false;
-            loginToolStripMenuItem.Text = "Login";
-            TOKEN = string.Empty;
         }
 
         private void copyUserTokenToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,7 +63,7 @@ namespace Chatter.Client
                 }
                 connected = true;
             }
-
+            refreshToolStripMenuItem.Enabled = connected;
             if (TOKEN == string.Empty)
             {
                 LoginForm form = new LoginForm();
@@ -89,6 +91,28 @@ namespace Chatter.Client
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
             richTextBox1.Size = new Size(this.Size.Width - 16, this.Size.Height - 64);
+        }
+
+        private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = colorDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                TrSetColor tr = new TrSetColor()
+                {
+                    color = colorDialog1.Color
+                };
+                SimpleTCP.Message message = Program._Client.WriteLineAndGetReply("setcolor\n" + TOKEN + "\n" + JsonConvert.SerializeObject(tr),TimeSpan.FromSeconds(10));
+                if (message == null)
+                {
+                    return;
+                }
+                if (message.MessageString == "OK")
+                {
+                    return;
+                }
+                MessageBox.Show(message.MessageString, "Error");
+            }
         }
     }
 }
