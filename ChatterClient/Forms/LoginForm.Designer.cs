@@ -75,9 +75,9 @@
             this.TBPassword.ForeColor = System.Drawing.Color.White;
             this.TBPassword.Location = new System.Drawing.Point(68, 45);
             this.TBPassword.Name = "TBPassword";
-            this.TBPassword.PasswordChar = '*';
             this.TBPassword.Size = new System.Drawing.Size(115, 20);
             this.TBPassword.TabIndex = 3;
+            this.TBPassword.UseSystemPasswordChar = true;
             // 
             // button1
             // 
@@ -98,9 +98,9 @@
             this.TBToken.ForeColor = System.Drawing.Color.White;
             this.TBToken.Location = new System.Drawing.Point(6, 19);
             this.TBToken.Name = "TBToken";
-            this.TBToken.PasswordChar = '*';
             this.TBToken.Size = new System.Drawing.Size(263, 20);
             this.TBToken.TabIndex = 6;
+            this.TBToken.UseSystemPasswordChar = true;
             // 
             // groupBox1
             // 

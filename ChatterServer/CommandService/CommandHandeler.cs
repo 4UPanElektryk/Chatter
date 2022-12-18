@@ -1,6 +1,7 @@
 ﻿using Chatter.Server.UserService;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Chatter.Server.CommandService
 {
@@ -20,8 +21,18 @@ namespace Chatter.Server.CommandService
                 new CmdAddUser("adduser"),
                 new CmdGetUsers("getusers"),
                 new CmdSetColor("setcolor"),
-                new CmdSetPswd("setpswd")
+                new CmdSetPswd("setpswd"),
+                new CmdRefresh("refresh")
             };
+        }
+        public static bool MakesImpact(string input)
+        {
+            List<string> strings = new List<string>
+            {
+                "addmsg",
+                "setcolor",
+            };
+            return strings.Contains(input);
         }
         public static string Run(string input)
         {

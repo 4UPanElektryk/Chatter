@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.newPostToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,6 +39,7 @@
             this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,6 +118,7 @@
             this.changePasswordToolStripMenuItem.Name = "changePasswordToolStripMenuItem";
             this.changePasswordToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.changePasswordToolStripMenuItem.Text = "Change Password";
+            this.changePasswordToolStripMenuItem.Click += new System.EventHandler(this.changePasswordToolStripMenuItem_Click);
             // 
             // loginToolStripMenuItem
             // 
@@ -139,6 +142,12 @@
             // 
             this.colorDialog1.Color = System.Drawing.Color.White;
             this.colorDialog1.FullOpen = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // MainForm
             // 
@@ -171,6 +180,7 @@
         private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

@@ -16,6 +16,7 @@ namespace Chatter.Server
     {
         public static SimpleTcpServer server;
         public static List<TcpClient> Clients;
+        public static DateTime LastChange;
         public static bool Working = true;
         static void Main(string[] args)
         {
@@ -63,6 +64,7 @@ namespace Chatter.Server
             {
                 Log.Write("Server Started on " + Config.Data.ServerIPAddress + ":" + Config.Data.ServerPort, EType.Informtion);
             }
+            LastChange = DateTime.UtcNow;
         }
         #region Client
         private static void Server_ClientDisconnected(object sender, TcpClient e)
@@ -79,6 +81,10 @@ namespace Chatter.Server
         private static void Server_DataReceived(object sender, Message e)
         {
             Log.AddEvent(new Event(e.MessageString.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None), EType.Normal));
+            if (CommandHandeler.MakesImpact(e.MessageString.Split(new string[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)[0]))
+            {
+                LastChange = DateTime.UtcNow;
+            }
             string reply = CommandHandeler.Run(e.MessageString);
             Log.Write(reply);
             e.ReplyLine(reply);

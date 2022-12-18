@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace Chatter.Client
@@ -11,17 +12,20 @@ namespace Chatter.Client
     {
         public string TOKEN;
         public bool connected;
+        public DateTime Time;
         public MainForm()
         {
             InitializeComponent();
             connected = false;
             TOKEN = string.Empty;
+            Time = DateTime.UtcNow;
         }
         public void LogedIn()
         {
             newPostToolStripMenuItem.Enabled = true;
             copyUserTokenToClipboardToolStripMenuItem.Enabled = true;
             changeColorToolStripMenuItem.Enabled = true;
+            changePasswordToolStripMenuItem.Enabled = true;
             loginToolStripMenuItem.Text = "Logout";
             richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
         }
@@ -30,6 +34,7 @@ namespace Chatter.Client
             newPostToolStripMenuItem.Enabled = false;
             copyUserTokenToClipboardToolStripMenuItem.Enabled = false;
             changeColorToolStripMenuItem.Enabled = false;
+            changePasswordToolStripMenuItem.Enabled = false;
             loginToolStripMenuItem.Text = "Login";
             TOKEN = string.Empty;
         }
@@ -87,6 +92,7 @@ namespace Chatter.Client
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
+            Time = DateTime.UtcNow;
         }
         private void MainForm_ResizeEnd(object sender, EventArgs e)
         {
@@ -112,6 +118,39 @@ namespace Chatter.Client
                     return;
                 }
                 MessageBox.Show(message.MessageString, "Error");
+            }
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewPasswordForm form = new NewPasswordForm(this);
+            form.ShowDialog();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (!connected)
+            {
+                return;
+            }
+            TrRefresh tr = new TrRefresh
+            {
+                time = Time
+            };
+            SimpleTCP.Message message = Program._Client.WriteLineAndGetReply("refresh\n"+TOKEN+"\n"+JsonConvert.SerializeObject(tr), TimeSpan.FromSeconds(2));
+            if (message == null)
+            {
+                richTextBox1.Text = "Connection Error";
+                return;
+            }
+            if (message.MessageString == "NOCHANGES")
+            {
+                return;
+            }
+            if (message.MessageString == "CHANGES")
+            {
+                richTextBox1 = MsgRenderer.RederMsgs(richTextBox1, GetMsgs());
+                Time = DateTime.UtcNow;
             }
         }
     }

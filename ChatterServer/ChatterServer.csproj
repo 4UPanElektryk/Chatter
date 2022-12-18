@@ -57,6 +57,7 @@
     <Compile Include="CommandService\CmdGetUsers.cs" />
     <Compile Include="CommandService\CmdInfo.cs" />
     <Compile Include="CommandService\CmdLogin.cs" />
+    <Compile Include="CommandService\CmdRefresh.cs" />
     <Compile Include="CommandService\CmdSetPswd.cs" />
     <Compile Include="CommandService\Command.cs" />
     <Compile Include="CommandService\CommandHandeler.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Transfer\TrGetUsers.cs" />
     <Compile Include="Transfer\TrInfo.cs" />
     <Compile Include="Transfer\TrLogin.cs" />
+    <Compile Include="Transfer\TrRefresh.cs" />
     <Compile Include="Transfer\TrSetColor.cs" />
     <Compile Include="Transfer\TrSetPswd.cs" />
     <Compile Include="UserService\TokenHandeler.cs" />
