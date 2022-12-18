@@ -11,7 +11,7 @@ namespace Chatter.Server.CommandService
         public CmdGetMsgs(string name) : base(name) { }
         public override string Execute(string text, User user)
         {
-            List<Msg> msgs = MsgHandeler.GetLastSeveral(20);
+            List<Msg> msgs = MsgHandeler.msgs;
             List<UMsg> umsgs = new List<UMsg>();
             foreach (Msg item in msgs)
             {

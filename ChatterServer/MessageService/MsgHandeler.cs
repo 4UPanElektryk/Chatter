@@ -56,8 +56,8 @@ namespace Chatter.Server.MessageService
         public static int GetNewID()
         {
             int ID = 0;
-            msgs.ForEach(msg => { if (msg._MessageID >= ID) { ID = msg._MessageID; } });
-            return ID++;
+            msgs.ForEach(msg => { if (msg._MessageID >= ID) { ID = msg._MessageID + 1; } });
+            return ID;
         }
     }
 }

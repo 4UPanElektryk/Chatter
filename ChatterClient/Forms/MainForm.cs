@@ -35,7 +35,7 @@ namespace Chatter.Client
         }
         public List<UMsg> GetMsgs()
         {
-            SimpleTCP.Message reply = Program._Client.WriteLineAndGetReply("getmsgs\n" + TOKEN + "\n", TimeSpan.FromSeconds(20));
+            SimpleTCP.Message reply = Program._Client.WriteLineAndGetReply("getmsgs\n" + TOKEN + "\n", TimeSpan.FromSeconds(5));
             try
             {
                 return JsonConvert.DeserializeObject<TrGetMsgs>(reply.MessageString).msgs;
