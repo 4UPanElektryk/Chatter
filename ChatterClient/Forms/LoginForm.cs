@@ -21,7 +21,7 @@ namespace Chatter.Client
                 SimpleTCP.Message reply = Program._Client.WriteLineAndGetReply("checktoken\n0\n" + token, TimeSpan.FromSeconds(20));
                 if (bool.Parse(reply.MessageString))
                 {
-                    Token = reply.MessageString;
+                    Token = token;
                     this.Close();
                 }
             }
