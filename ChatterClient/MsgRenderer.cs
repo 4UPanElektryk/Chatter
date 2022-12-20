@@ -20,7 +20,7 @@ namespace Chatter.Client
             foreach (UMsg item in msgs)
             {
                 int prstart = textBox.Text.Length;
-                textBox.Text += item._Sent.ToString("dd.MM.yyyy HH:mm:ss") + "\n";
+                textBox.Text += item._Sent.ToLocalTime().ToString("dd.MM.yyyy HH:mm:ss") + "\n";
                 textBox.Text += item._UserName + "\n";
                 int start = textBox.Text.Length;
                 Bolds.Add(new Loc
