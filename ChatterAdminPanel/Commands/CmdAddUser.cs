@@ -40,10 +40,10 @@ namespace Chatter.AdminPanel.Commands
             }
             TrAddUser tr = new TrAddUser
             {
-                _Name = login,
-                _Password = pass1,
-                _TextColor = color,
-                _IsAdmin = isadmin
+                Name = login,
+                Password = pass1,
+                TextColor = color,
+                IsAdmin = isadmin
             };
             Message message = Program._Client.WriteLineAndGetReply("adduser\n"+Program.Token+"\n"+JsonConvert.SerializeObject(tr), TimeSpan.FromSeconds(20));
             if (message.MessageString != "OK")

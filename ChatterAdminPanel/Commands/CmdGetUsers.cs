@@ -22,11 +22,11 @@ namespace Chatter.AdminPanel.Commands
 			TrUser[] tr = JsonConvert.DeserializeObject<TrUser[]>(message.MessageString);
             foreach (TrUser item in tr)
             {
-                if (item._IsAdmin)
+                if (item.IsAdmin)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
-                Console.WriteLine(item._Id + " " + item._Name);
+                Console.WriteLine(item.Id + " " + item.Name);
                 Console.ResetColor();
             }
             return base.Execute(text);
