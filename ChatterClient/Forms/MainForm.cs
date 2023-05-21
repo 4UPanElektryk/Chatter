@@ -38,12 +38,12 @@ namespace Chatter.Client
             loginToolStripMenuItem.Text = "Login";
             TOKEN = string.Empty;
         }
-        public List<UMsg> GetMsgs()
+        public SMsg[] GetMsgs()
         {
             SimpleTCP.Message reply = Program._Client.WriteLineAndGetReply("getmsgs\n" + TOKEN + "\n", TimeSpan.FromSeconds(5));
             try
             {
-                return JsonConvert.DeserializeObject<TrGetMsgs>(reply.MessageString).msgs;
+                return JsonConvert.DeserializeObject<SMsg[]>(reply.MessageString);
             }
             catch
             {
@@ -55,7 +55,6 @@ namespace Chatter.Client
         {
             Clipboard.SetText(TOKEN);
         }
-
         private void loginToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!connected)
@@ -71,6 +70,7 @@ namespace Chatter.Client
             refreshToolStripMenuItem.Enabled = connected;
             if (TOKEN == string.Empty)
             {
+                timer1.Stop();
                 LoginForm form = new LoginForm();
                 form.ShowDialog();
                 if (form.Token != string.Empty)
@@ -78,6 +78,7 @@ namespace Chatter.Client
                     TOKEN = form.Token;
                     LogedIn();
                 }
+                timer1.Stop();
             }
             else
             {
@@ -87,7 +88,9 @@ namespace Chatter.Client
 
         private void newPostToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new NewMsgForm(this).Show();
+            timer1.Stop();
+            new NewMsgForm(this).ShowDialog();
+            timer1.Start();
         }
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -104,11 +107,7 @@ namespace Chatter.Client
             DialogResult result = colorDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
-                TrSetColor tr = new TrSetColor()
-                {
-                    color = colorDialog1.Color
-                };
-                SimpleTCP.Message message = Program._Client.WriteLineAndGetReply("setcolor\n" + TOKEN + "\n" + JsonConvert.SerializeObject(tr),TimeSpan.FromSeconds(10));
+                SimpleTCP.Message message = Program._Client.WriteLineAndGetReply("setcolor\n" + TOKEN + "\n" + JsonConvert.SerializeObject(colorDialog1.Color),TimeSpan.FromSeconds(10));
                 if (message == null)
                 {
                     return;
@@ -120,24 +119,26 @@ namespace Chatter.Client
                 MessageBox.Show(message.MessageString, "Error");
             }
         }
-
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             NewPasswordForm form = new NewPasswordForm(this);
             form.ShowDialog();
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (!connected)
             {
                 return;
             }
-            TrRefresh tr = new TrRefresh
+            SimpleTCP.Message message;
+			try
             {
-                time = Time
-            };
-            SimpleTCP.Message message = Program._Client.WriteLineAndGetReply("refresh\n"+TOKEN+"\n"+JsonConvert.SerializeObject(tr), TimeSpan.FromSeconds(2));
+                message = Program._Client.WriteLineAndGetReply("refresh\n"+TOKEN+"\n"+JsonConvert.SerializeObject(Time), TimeSpan.FromSeconds(2));
+            }
+            catch
+            {
+                message = null;
+            }
             if (message == null)
             {
                 richTextBox1.Text = "Connection Error";

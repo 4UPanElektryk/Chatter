@@ -19,8 +19,8 @@ namespace Chatter.AdminPanel.Commands
             {
                 return true;
             }
-            TrGetUsers tr = JsonConvert.DeserializeObject<TrGetUsers>(message.MessageString);
-            foreach (TrUser item in tr.users)
+			TrUser[] tr = JsonConvert.DeserializeObject<TrUser[]>(message.MessageString);
+            foreach (TrUser item in tr)
             {
                 if (item._IsAdmin)
                 {

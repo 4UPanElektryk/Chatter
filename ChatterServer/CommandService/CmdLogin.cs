@@ -10,14 +10,7 @@ namespace Chatter.Server.CommandService
         public override string Execute(string text, User user)
         {
             TrLogin data = JsonConvert.DeserializeObject<TrLogin>(text);
-            if (data == null)
-            {
-                return "0";
-            }
-            else
-            {
-                return TokenHandeler.AddToken(UserHandeler.GetUser(data.Login, data.Password));
-            }
+            return TokenHandeler.AddToken(UserHandeler.GetUser(data.Login, data.Password));
         }
     }
 }

@@ -14,14 +14,14 @@ namespace Chatter.Server.CommandService
             {
                 return "E-TKN";
             }
-            TrAddMsg tr = JsonConvert.DeserializeObject<TrAddMsg>(text);
+            string[] tr = JsonConvert.DeserializeObject<string[]>(text);
             if (tr == null)
             {
                 return "E-DAT";
             }
             Msg msg = new Msg
             {
-                _Message = tr.Lines,
+                _Message = tr,
                 _UserID = user._Id,
             };
             MsgHandeler.AddMsg(msg);

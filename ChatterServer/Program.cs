@@ -55,7 +55,7 @@ namespace Chatter.Server
             new Config("config.json");
             Config.Load();
             new CommandHandeler();
-            new Log(ConvertPlatform(Config.Data.LogsDirectory), OutputStream.Both, Config.Data.LogsPrefix);
+            new LogConfiguration(ConvertPlatform(Config.Data.LogsDirectory), OutputStream.Both, Config.Data.LogsPrefix);
             new UserHandeler(ConvertPlatform(Config.Data.UserBaseFile));
             new MsgHandeler(ConvertPlatform(Config.Data.MessagebaseFile));
             new TokenHandeler();

@@ -15,11 +15,7 @@ namespace Chatter.Client
         }
         private void sendToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TrAddMsg tr = new TrAddMsg
-            {
-                Lines = textBox1.Lines,
-            };
-            SimpleTCP.Message response = Program._Client.WriteLineAndGetReply("addmsg\n" + Token + "\n" + JsonConvert.SerializeObject(tr), TimeSpan.FromSeconds(20));
+            SimpleTCP.Message response = Program._Client.WriteLineAndGetReply("addmsg\n" + Token + "\n" + JsonConvert.SerializeObject(textBox1.Lines), TimeSpan.FromSeconds(20));
             if (response.MessageString == "OK")
             {
                 this.Close();

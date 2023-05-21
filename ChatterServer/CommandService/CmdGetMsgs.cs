@@ -12,24 +12,20 @@ namespace Chatter.Server.CommandService
         public override string Execute(string text, User user)
         {
             List<Msg> msgs = MsgHandeler.msgs;
-            List<UMsg> umsgs = new List<UMsg>();
+            List<SMsg> umsgs = new List<SMsg>();
             foreach (Msg item in msgs)
             {
-                UMsg temp = new UMsg
+                SMsg temp = new SMsg
                 {
-                    _Message = item._Message,
-                    _MessageID = item._MessageID,
-                    _Sent = item._Sent,
-                    _UserName = UserHandeler.GetUser(item._UserID)._Name,
-                    _Color = UserHandeler.GetUser(item._UserID)._TextColor,
+                    Message = item._Message,
+                    MessageID = item._MessageID,
+                    Sent = item._Sent,
+                    UserName = UserHandeler.GetUser(item._UserID)._Name,
+                    Color = UserHandeler.GetUser(item._UserID)._TextColor,
                 };
                 umsgs.Add(temp);
             }
-            TrGetMsgs tr = new TrGetMsgs
-            {
-                msgs = umsgs,
-            };
-            return JsonConvert.SerializeObject(tr);
+            return JsonConvert.SerializeObject(umsgs.ToArray());
         }
     }
 }

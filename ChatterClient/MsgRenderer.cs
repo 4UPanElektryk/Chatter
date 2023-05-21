@@ -7,7 +7,7 @@ namespace Chatter.Client
 {
     public class MsgRenderer
     {
-        public static RichTextBox RederMsgs(RichTextBox textBox, List<UMsg> msgs)
+        public static RichTextBox RederMsgs(RichTextBox textBox, SMsg[] msgs)
         {
             if (msgs == null)
             {
@@ -17,24 +17,24 @@ namespace Chatter.Client
             textBox.Text = "";
             List<Loc> collocs = new List<Loc>();
             List<Loc> Bolds = new List<Loc>();
-            foreach (UMsg item in msgs)
+            foreach (SMsg item in msgs)
             {
                 int prstart = textBox.Text.Length;
-                textBox.Text += item._Sent.ToLocalTime().ToString("dd.MM.yyyy HH:mm:ss") + "\n";
-                textBox.Text += item._UserName + "\n";
+                textBox.Text += item.Sent.ToLocalTime().ToString("dd.MM.yyyy HH:mm:ss") + "\n";
+                textBox.Text += item.UserName + "\n";
                 int start = textBox.Text.Length;
                 Bolds.Add(new Loc
                 {
                     start_index = prstart,
                     length = textBox.Text.Length - prstart,
                 });
-                textBox.Text += string.Join("\n", item._Message) + "\n";
+                textBox.Text += string.Join("\n", item.Message) + "\n";
                 int len = textBox.Text.Length - start;
                 collocs.Add(new Loc
                 {
                     start_index = start,
                     length = len,
-                    color = item._Color,
+                    color = item.Color,
                 });
             }
             #endregion
@@ -59,7 +59,7 @@ namespace Chatter.Client
             return textBox;
         }
     }
-    public class Loc
+    public struct Loc
     {
         public int start_index;
         public int length;

@@ -13,12 +13,12 @@ namespace Chatter.Server.CommandService
 			{
 				return "E-TKN";
 			}
-			TrSetPswd tr = JsonConvert.DeserializeObject<TrSetPswd>(text);
+			string tr = JsonConvert.DeserializeObject<string>(text);
 			if (tr == null)
 			{
 				return "E-DAT";
 			}
-			UserHandeler.ChangePassword(tr.Password, user._Id);
+			UserHandeler.ChangePassword(tr, user._Id);
 			return "OK";
 		}
 	}

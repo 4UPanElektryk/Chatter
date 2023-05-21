@@ -14,12 +14,12 @@ namespace Chatter.Server.CommandService
         public CmdRefresh(string name) : base(name) { }
         public override string Execute(string text, User user)
         {
-            TrRefresh tr = JsonConvert.DeserializeObject<TrRefresh>(text);
+            DateTime tr = JsonConvert.DeserializeObject<DateTime>(text);
             if (tr == null)
             {
                 return "E-DAT";
             }
-            if (tr.time < Program.LastChange)
+            if (tr < Program.LastChange)
             {
                 return "CHANGES";
             }

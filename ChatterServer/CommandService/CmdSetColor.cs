@@ -1,6 +1,7 @@
 ﻿using Chatter.Server.UserService;
 using Chatter.Server.Transfer;
 using Newtonsoft.Json;
+using System.Drawing;
 
 namespace Chatter.Server.CommandService
 {
@@ -13,12 +14,12 @@ namespace Chatter.Server.CommandService
             {
                 return "E-TKN";
             }
-            TrSetColor tr = JsonConvert.DeserializeObject<TrSetColor>(text);
+            Color tr = JsonConvert.DeserializeObject<Color>(text);
             if (tr == null)
             {
                 return "E-DAT";
             }
-            UserHandeler.SetUserColor(tr.color, user._Id);
+            UserHandeler.SetUserColor(tr, user._Id);
             return "OK";
         }
     }

@@ -14,20 +14,19 @@ namespace Chatter.Server.CommandService
         public CmdGetUsers(string name) : base(name) { }
         public override string Execute(string text, User user)
         {
-            TrGetUsers tr = new TrGetUsers();
-            tr.users = new List<TrUser>();
+            List<TrUser> tr = new List<TrUser>();
             foreach (User item in UserHandeler.users)
             {
                 TrUser tr1 = new TrUser
                 {
-                    _Id = item._Id,
-                    _IsAdmin = item._IsAdmin,
-                    _Name = item._Name,
-                    _TextColor = item._TextColor
+                    Id = item._Id,
+                    IsAdmin = item._IsAdmin,
+                    Name = item._Name,
+                    TextColor = item._TextColor
                 };
-                tr.users.Add(tr1);
+                tr.Add(tr1);
             }
-            return JsonConvert.SerializeObject(tr);
+            return JsonConvert.SerializeObject(tr.ToArray());
         }
     }
 }

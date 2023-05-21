@@ -33,11 +33,7 @@ namespace Chatter.Client
                 MessageBox.Show("Password needs at least 8 characters");
                 return;
             }
-            TrSetPswd tr = new TrSetPswd()
-            {
-                Password = textBox1.Text
-            };
-            SimpleTCP.Message message = Program._Client.WriteLineAndGetReply("setpswd\n"+TOKEN+"\n"+JsonConvert.SerializeObject(tr),TimeSpan.FromSeconds(5));
+            SimpleTCP.Message message = Program._Client.WriteLineAndGetReply("setpswd\n"+TOKEN+"\n"+JsonConvert.SerializeObject(textBox1.Text),TimeSpan.FromSeconds(5));
             if (message == null)
             {
                 MessageBox.Show("Connection Error");

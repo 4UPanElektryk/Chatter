@@ -19,21 +19,17 @@ namespace Chatter.Server.CommandService
                 return "E-TKN";
             }
             TrAddUser tr = JsonConvert.DeserializeObject<TrAddUser>(text);
-            if (tr == null)
-            {
-                return "E-DAT";
-            }
-            if (UserHandeler.LoginInUse(tr._Name))
+            if (UserHandeler.LoginInUse(tr.Name))
             {
                 return "E-NAM";
             }
             User user1 = new User
             {
                 _Id = UserHandeler.GetNewId(),
-                _IsAdmin = tr._IsAdmin,
-                _Name = tr._Name,
-                _Password = tr._Password,
-                _TextColor = tr._TextColor,
+                _IsAdmin = tr.IsAdmin,
+                _Name = tr.Name,
+                _Password = tr.Password,
+                _TextColor = tr.TextColor,
             };
             UserHandeler.AddUser(user1);
             UserHandeler.Save();
