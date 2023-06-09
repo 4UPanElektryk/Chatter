@@ -88,7 +88,7 @@ namespace Chatter.AdminPanel
 		}
 		static void Login()
 		{
-			do
+			while (true)
 			{
 				Console.Write("Login >");
 				string login = Console.ReadLine();
@@ -110,7 +110,8 @@ namespace Chatter.AdminPanel
 					Token = reply.MessageString;
 					break;
 				}
-			} while (true);
+                Console.WriteLine("Login Failed!");
+            }
 		}
 		static void MainLoop()
 		{
