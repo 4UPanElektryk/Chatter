@@ -1,20 +1,31 @@
-﻿using Chatter.Server.Transfer;
-using Chatter.Server.UserService;
-using Newtonsoft.Json;
+﻿using Chatter.Server.UserService;
+using IMTP.Server;
+using System.Collections.Generic;
 
 namespace Chatter.Server.CommandService
 {
-    public class CmdAdminLogin : Command
-    {
-        public CmdAdminLogin(string name) : base(name) { }
-        public override string Execute(string text, User user)
-        {
-            TrLogin data = JsonConvert.DeserializeObject<TrLogin>(text);
-            if (UserHandeler.GetUser(data.Login, data.Password)._IsAdmin)
-            {
-                return TokenHandeler.AddToken(UserHandeler.GetUser(data.Login, data.Password));
-            }
-            return "0";
-        }
-    }
+	public class CmdAdminLogin : Command
+	{
+		public CmdAdminLogin(string name) : base(name) { }
+		public override IMTPResponse Execute(IMTPRequest request, User user)
+		{
+			if (UserHandeler.GetUser((string)request.Data["Login"], (string)request.Data["Password"]).IsAdmin)
+			{
+				return new IMTPResponse(IMTPStatusCode.OK)
+				{
+					Data = new Dictionary<string, object>()
+					{
+						{ "Token", TokenHandeler.AddToken(UserHandeler.GetUser((string)request.Data["Login"], (string)request.Data["Password"])) }
+					}
+				};
+			}
+			return new IMTPResponse(IMTPStatusCode.OK)
+			{
+				Data = new Dictionary<string, object>()
+				{
+					{ "Token", "0" }
+				}
+			};
+		}
+	}
 }

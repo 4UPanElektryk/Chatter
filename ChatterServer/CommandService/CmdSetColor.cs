@@ -1,26 +1,24 @@
 ﻿using Chatter.Server.UserService;
-using Chatter.Server.Transfer;
-using Newtonsoft.Json;
 using System.Drawing;
+using IMTP.Server;
 
 namespace Chatter.Server.CommandService
 {
-    public class CmdSetColor : Command
-    {
-        public CmdSetColor(string name) : base(name) { }
-        public override string Execute(string text, User user)
-        {
-            if (user == null)
-            {
-                return "E-TKN";
-            }
-            Color tr = JsonConvert.DeserializeObject<Color>(text);
-            if (tr == null)
-            {
-                return "E-DAT";
-            }
-            UserHandeler.SetUserColor(tr, user._Id);
-            return "OK";
-        }
-    }
+	public class CmdSetColor : Command
+	{
+		public CmdSetColor(string name) : base(name) { }
+		public override IMTPResponse Execute(IMTPRequest request, User user)
+		{
+			if (user == null)
+			{
+				return new IMTPResponse(IMTPStatusCode.AuthenticationNeeded);
+			}
+			if (!request.Data.ContainsKey("Color"))
+			{
+				return new IMTPResponse(IMTPStatusCode.IncorrectData);
+			}
+			UserHandeler.SetUserColor((Color)request.Data["Color"], user.Id);
+			return new IMTPResponse(IMTPStatusCode.OK);
+		}
+	}
 }

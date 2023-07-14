@@ -1,32 +1,26 @@
-﻿using Chatter.Server.Transfer;
-using Chatter.Server.UserService;
-using Newtonsoft.Json;
-using System;
+﻿using Chatter.Server.UserService;
+using IMTP.Server;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace Chatter.Server.CommandService
 {
-    public class CmdRefresh : Command
-    {
-        public CmdRefresh(string name) : base(name) { }
-        public override string Execute(string text, User user)
-        {
-            DateTime tr = JsonConvert.DeserializeObject<DateTime>(text);
-            if (tr == null)
-            {
-                return "E-DAT";
-            }
-            if (tr < Program.LastChange)
-            {
-                return "CHANGES";
-            }
-            else
-            {
-                return "NOCHANGES";
-            }
-        }
-    }
+	public class CmdRefresh : Command
+	{
+		public CmdRefresh(string name) : base(name) { }
+		public override IMTPResponse Execute(IMTPRequest request, User user)
+		{
+			if (!request.Data.ContainsKey("Time"))
+			{
+				return new IMTPResponse(IMTPStatusCode.IncorrectData);
+			}
+			return new IMTPResponse(IMTPStatusCode.OK)
+			{
+				Data = new Dictionary<string, object>()
+				{
+					{ "Changes", (DateTime)request.Data["Time"] < Program.LastChange }
+				}
+			};
+		}
+	}
 }

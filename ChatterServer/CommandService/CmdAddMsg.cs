@@ -1,32 +1,29 @@
 ﻿using Chatter.Server.MessageService;
-using Chatter.Server.Transfer;
 using Chatter.Server.UserService;
-using Newtonsoft.Json;
+using IMTP.Server;
 
 namespace Chatter.Server.CommandService
 {
-    public class CmdAddMsg : Command
-    {
-        public CmdAddMsg(string name) : base(name) { }
-        public override string Execute(string text, User user)
-        {
-            if (user == null)
-            {
-                return "E-TKN";
-            }
-            string[] tr = JsonConvert.DeserializeObject<string[]>(text);
-            if (tr == null)
-            {
-                return "E-DAT";
-            }
-            Msg msg = new Msg
-            {
-                _Message = tr,
-                _UserID = user._Id,
-            };
-            MsgHandeler.AddMsg(msg);
-
-            return "OK";
-        }
-    }
+	public class CmdAddMsg : Command
+	{
+		public CmdAddMsg(string name) : base(name) { }
+		public override IMTPResponse Execute(IMTPRequest request, User user)
+		{
+			if (user == null)
+			{
+				return new IMTPResponse(IMTPStatusCode.AuthenticationNeeded);
+			}
+			if (!request.Data.ContainsKey("Message"))
+			{
+				return new IMTPResponse(IMTPStatusCode.IncorrectData);
+			}
+			Msg msg = new Msg
+			{
+				_Message = (string[])request.Data["Message"],
+				_UserID = user.Id,
+			};
+			MsgHandeler.AddMsg(msg);
+			return new IMTPResponse(IMTPStatusCode.OK);
+		}
+	}
 }

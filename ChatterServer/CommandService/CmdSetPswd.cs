@@ -1,25 +1,23 @@
-﻿using Chatter.Server.Transfer;
-using Chatter.Server.UserService;
-using Newtonsoft.Json;
+﻿using Chatter.Server.UserService;
+using IMTP.Server;
 
 namespace Chatter.Server.CommandService
 {
 	public class CmdSetPswd : Command
 	{
 		public CmdSetPswd(string name) : base(name) { }
-		public override string Execute(string text, User user)
+		public override IMTPResponse Execute(IMTPRequest request, User user)
 		{
 			if (user == null)
 			{
-				return "E-TKN";
+				return new IMTPResponse(IMTPStatusCode.AuthenticationNeeded);
 			}
-			string tr = JsonConvert.DeserializeObject<string>(text);
-			if (tr == null)
+			if (!request.Data.ContainsKey("Password"))
 			{
-				return "E-DAT";
+				return new IMTPResponse(IMTPStatusCode.IncorrectData);
 			}
-			UserHandeler.ChangePassword(tr, user._Id);
-			return "OK";
+			UserHandeler.ChangePassword((string)request.Data["Password"], user.Id);
+			return new IMTPResponse(IMTPStatusCode.OK);
 		}
 	}
 }

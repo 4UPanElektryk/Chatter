@@ -1,39 +1,44 @@
-﻿using Chatter.Server.Transfer;
-using Chatter.Server.UserService;
-using Newtonsoft.Json;
-using System;
+﻿using Chatter.Server.UserService;
+using IMTP.Server;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Chatter.Server.CommandService
 {
-    public class CmdAddUser : Command
-    {
-        public CmdAddUser(string name) : base(name) { }
-        public override string Execute(string text, User user)
-        {
-            if (user == null)
-            {
-                return "E-TKN";
-            }
-            TrAddUser tr = JsonConvert.DeserializeObject<TrAddUser>(text);
-            if (UserHandeler.LoginInUse(tr.Name))
-            {
-                return "E-NAM";
-            }
-            User user1 = new User
-            {
-                _Id = UserHandeler.GetNewId(),
-                _IsAdmin = tr.IsAdmin,
-                _Name = tr.Name,
-                _Password = tr.Password,
-                _TextColor = tr.TextColor,
-            };
-            UserHandeler.AddUser(user1);
-            UserHandeler.Save();
-            return "OK";
-        }
-    }
+	public class CmdAddUser : Command
+	{
+		public CmdAddUser(string name) : base(name) { }
+		public override IMTPResponse Execute(IMTPRequest request, User user)
+		{
+			if (user == null)
+			{
+				return new IMTPResponse(IMTPStatusCode.AuthenticationNeeded);
+			}
+			if (!request.Data.ContainsKey("Username") || !request.Data.ContainsKey("Password") || !request.Data.ContainsKey("TextColor") || !request.Data.ContainsKey("IsAdmin"))
+			{
+				return new IMTPResponse(IMTPStatusCode.IncorrectData);
+			}
+			if (UserHandeler.LoginInUse((string)request.Data["Username"]))
+			{
+				return new IMTPResponse(IMTPStatusCode.AuthenticationError)
+				{
+					Data = new Dictionary<string, object>()
+					{
+						{ "ErrorMessage", "Login in Use" }
+					}
+				};
+			}
+			User user1 = new User
+			{
+				Id = UserHandeler.GetNewId(),
+				IsAdmin = (bool)request.Data["IsAdmin"],
+				Name = (string)request.Data["Username"],
+				Password = (string)request.Data["Password"],
+				TextColor = (Color)request.Data["TextColor"],
+			};
+			UserHandeler.AddUser(user1);
+			UserHandeler.Save();
+			return new IMTPResponse(IMTPStatusCode.OK);
+		}
+	}
 }

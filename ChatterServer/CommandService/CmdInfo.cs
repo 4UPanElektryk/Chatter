@@ -1,24 +1,29 @@
-﻿using Chatter.Server.Transfer;
-using Chatter.Server.UserService;
-using Newtonsoft.Json;
+﻿using Chatter.Server.UserService;
+using IMTP.Server;
+using System.Collections.Generic;
 using System;
 
 namespace Chatter.Server.CommandService
 {
-    public class CmdInfo : Command
-    {
-        public CmdInfo(string name) : base(name) { }
-        public override string Execute(string text, User user)
-        {
-            TrInfo output = new TrInfo
-            {
-                ServerName = Config.Data.ServerName,
-                ServerVersion = Config.Data.ServerVersion,
-                Time = DateTime.Now,
-                Username = user._Name,
-            };
-
-            return JsonConvert.SerializeObject(output);
-        }
-    }
+	public class CmdInfo : Command
+	{
+		public CmdInfo(string name) : base(name) { }
+		public override IMTPResponse Execute(IMTPRequest request, User user)
+		{
+			if (user == null)
+			{
+				return new IMTPResponse(IMTPStatusCode.AuthenticationNeeded);
+			}
+			return new IMTPResponse(IMTPStatusCode.OK)
+			{
+				Data = new Dictionary<string, object>()
+				{
+					{ "ServerName", Config.Data.ServerName },
+					{ "ServerVersion", Config.Data.ServerVersion },
+					{ "Time", DateTime.UtcNow },
+					{ "Username", user.Name }
+				}
+			};
+		}
+	}
 }
