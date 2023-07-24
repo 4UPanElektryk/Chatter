@@ -1,11 +1,9 @@
 ﻿using Chatter.AdminPanel.Transfer;
 using Newtonsoft.Json;
-using SimpleTCP;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using IMTP.Client;
 using System.Threading.Tasks;
 
 namespace Chatter.AdminPanel.Commands
@@ -38,17 +36,20 @@ namespace Chatter.AdminPanel.Commands
             {
                 color = Color.White;
             }
-            TrAddUser tr = new TrAddUser
+			Dictionary<string, object> data = new Dictionary<string, object>()
+			{
+				{ "Auth", Program.Token },
+                { "IsAdmin", isadmin },
+                { "Username", login },
+                { "Password", pass1 },
+                { "TextColor", color }
+			};
+			Task<IMTPResponse> task = Program._Client.SendRequest("/adduser", data);
+			task.Wait();
+			IMTPResponse response = task.Result;
+			if (response.StatusCode != (int)IMTPStatusCode.OK)
             {
-                Name = login,
-                Password = pass1,
-                TextColor = color,
-                IsAdmin = isadmin
-            };
-            Message message = Program._Client.WriteLineAndGetReply("adduser\n"+Program.Token+"\n"+JsonConvert.SerializeObject(tr), TimeSpan.FromSeconds(20));
-            if (message.MessageString != "OK")
-            {
-                Program.ShowErr(message.MessageString);
+                Program.ShowErr(response);
                 return true;
             }
             Console.WriteLine("User Added");

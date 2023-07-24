@@ -1,8 +1,6 @@
 ﻿using Chatter.Server.UserService;
 using IMTP.Server;
-using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Chatter.Server.CommandService
 {

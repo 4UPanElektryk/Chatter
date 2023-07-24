@@ -11,7 +11,6 @@ namespace Chatter.AdminPanel.Commands
             commands = new List<Command>
             {
                 new CmdInfo("info"),
-                new CmdAnoucment("anoucment"),
                 new CmdAddUser("adduser"),
                 new CmdGetUsers("getusers")
             };

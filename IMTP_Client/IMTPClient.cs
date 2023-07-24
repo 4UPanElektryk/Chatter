@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SimpleTCP;
 
-namespace ConsoleApp1
+namespace IMTP.Client
 {
 
 	public class IMTPClient
@@ -23,37 +23,28 @@ namespace ConsoleApp1
 			Client.Connect(serverUrl, port);
 		}
 
-		public async Task<ProtocolResponse> SendRequest(string path, Dictionary<string, object> requestData)
+		public async Task<IMTPResponse> SendRequest(string path, Dictionary<string, object> requestData)
 		{
 			string jsonRequestData = JsonConvert.SerializeObject(requestData);
 			string requestContent = $"IMTP/1.0 {path}\r\n{jsonRequestData}";
-			
-			var response = Client.WriteLineAndGetReply(requestContent,TimeSpan.FromSeconds(3));
+
+			var response = Client.WriteLineAndGetReply(requestContent, TimeSpan.FromSeconds(3));
 			return ParseResponse(response.MessageString);
 		}
 
-		private ProtocolResponse ParseResponse(string responseContent)
+		private IMTPResponse ParseResponse(string responseContent)
 		{
 			string[] lines = responseContent.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
 			int statusCode = int.Parse(lines[0].Split('/')[0]);
 			string message = lines[0].Split('/')[1];
 			string jsonContent = responseContent.Substring(lines[0].Length).Trim();
 
-			var responseData = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonContent);
-
-			return new ProtocolResponse
+			return new IMTPResponse
 			{
 				StatusCode = statusCode,
 				Message = message,
-				Data = responseData
+				Data = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonContent)
 			};
 		}
-	}
-
-	public struct ProtocolResponse
-	{
-		public int StatusCode { get; set; }
-		public string Message { get; set; }
-		public Dictionary<string, object> Data { get; set; }
 	}
 }

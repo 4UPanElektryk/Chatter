@@ -1,6 +1,7 @@
-﻿using Chatter.AdminPanel.Transfer;
-using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Threading.Tasks;
+using IMTP.Client;
+using System.Collections.Generic;
 
 namespace Chatter.AdminPanel.Commands
 {
@@ -9,11 +10,17 @@ namespace Chatter.AdminPanel.Commands
         public CmdInfo(string name) : base(name) { }
         public override bool Execute(string text)
         {
-            TrInfo data = JsonConvert.DeserializeObject<TrInfo>(Program._Client.WriteLineAndGetReply("info\n" + Program.Token + "\n", TimeSpan.FromSeconds(300)).MessageString);
-            Console.WriteLine("Client Username: " + data.Username);
-            Console.WriteLine("Server: " + data.ServerName + "/" + data.ServerVersion);
+            Dictionary<string, object> data = new Dictionary<string, object>()
+            {
+                { "Auth", Program.Token },
+            };
+			Task<IMTPResponse> task = Program._Client.SendRequest("/info", data);
+			task.Wait();
+			IMTPResponse response = task.Result;
+            Console.WriteLine("Client Username: " + (string)response.Data["Username"]);
+            Console.WriteLine("Server: " + (string)response.Data["ServerName"] + "/" + (string)response.Data["ServerVersion"]);
             Console.WriteLine("Server Address: " + Program.Address + ":" + Program.Port);
-            Console.WriteLine("Server Time: " + data.Time.ToString("dd/MM/yyyy HH:mm:ss"));
+            Console.WriteLine("Server Time: " + ((DateTime)response.Data["Time"]).ToString("dd/MM/yyyy HH:mm:ss"));
             return true;
         }
     }

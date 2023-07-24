@@ -1,15 +1,15 @@
 ﻿using Chatter.AdminPanel.Commands;
-using Chatter.AdminPanel.Transfer;
 using Newtonsoft.Json;
-using SimpleTCP;
+using IMTP.Client;
 using System;
-using System.Text;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Chatter.AdminPanel
 {
 	public class Program
 	{
-		public static SimpleTcpClient _Client;
+		public static IMTPClient _Client;
 		public static string Token = string.Empty;
 		public static string Address = string.Empty;
 		public static int Port = 0;
@@ -24,33 +24,18 @@ namespace Chatter.AdminPanel
 		static void Init()
 		{
 			new CommandHandeler();
-			_Client = new SimpleTcpClient
-			{
-				StringEncoder = Encoding.UTF8,
-				AutoTrimStrings = true,
-				Delimiter = (byte)'\n',
-			};
 		}
-		public static void ShowErr(string error)
+		public static void ShowErr(IMTPResponse error)
 		{
 			Console.ForegroundColor = ConsoleColor.Red;
-			switch (error)
-			{
-				case "E-TKN":
-					Console.WriteLine("Token Error");
-					break;
-				case "E-DAT":
-					Console.WriteLine("Sent Data Error");
-					break;
-				case "E-NAM":
-					Console.WriteLine("Name already in Use");
-					break;
-				default:
-					Console.WriteLine("Un Expected Error");
-					break;
-			}
-			Console.WriteLine("Error Code: " + error);
+			Console.WriteLine($"Error Encoutered: {error.Message}");
+			Console.WriteLine($"Error Code: {error.StatusCode}");
 			Console.ResetColor();
+			Console.WriteLine("Aditional Data: ");
+			foreach (KeyValuePair<string,object> item in error.Data)
+			{
+				Console.WriteLine(item.Key + " - " + JsonConvert.SerializeObject(item.Value));
+			}
 		}
 		static void Connect()
 		{
@@ -72,7 +57,7 @@ namespace Chatter.AdminPanel
 						address = address.Split(':')[0];
 						Console.WriteLine(port);
 					}
-					_Client.Connect(address, port);
+					_Client = new IMTPClient(address, port);
 					Address = address;
 					Port = port;
 					break;
@@ -98,26 +83,36 @@ namespace Chatter.AdminPanel
 				string password = Console.ReadLine();
 				Console.ResetColor();
 				Console.CursorVisible = true;
-				LoginTransfer transfer = new LoginTransfer
+				Dictionary<string, object> data = new Dictionary<string, object>()
 				{
-					Login = login,
-					Password = password,
+					{ "Login", login },
+					{ "Password", password }
 				};
-				string data = JsonConvert.SerializeObject(transfer);
-				Message reply = _Client.WriteLineAndGetReply("login\n0\n" + data, TimeSpan.FromSeconds(300));
-				if (reply.MessageString != "0")
+				Task<IMTPResponse> task = _Client.SendRequest("/adminlogin", data);
+				task.Wait();
+				IMTPResponse response = task.Result;
+				if (response.StatusCode != (int)IMTPStatusCode.OK)
 				{
-					Token = reply.MessageString;
+					ShowErr(response);
+					continue;
+				}
+				if ((string)response.Data["Token"] != "0")
+				{
+					Token = (string)response.Data["Token"];
 					break;
 				}
-                Console.WriteLine("Login Failed!");
-            }
+				Console.WriteLine("Login Failed!");
+			}
 		}
 		static void MainLoop()
 		{
 			while (true)
 			{
-				CommandHandeler.Run(Console.ReadLine());
+				Console.Write($"{Address}:{Port}>");
+				if (!CommandHandeler.Run(Console.ReadLine()))
+				{
+					Console.WriteLine("Command Not Found!");
+				}
 			}
 		}
 	}

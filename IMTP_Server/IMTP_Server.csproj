@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMTPStatusCode.cs" />
     <Compile Include="IMTPVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IMTPServer.cs" />

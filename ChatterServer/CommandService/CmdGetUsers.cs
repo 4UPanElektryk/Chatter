@@ -1,6 +1,7 @@
 ﻿using Chatter.Server.Transfer;
 using Chatter.Server.UserService;
 using IMTP.Server;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Chatter.Server.CommandService
@@ -30,7 +31,7 @@ namespace Chatter.Server.CommandService
 			{
 				Data = new Dictionary<string, object>()
 				{
-					{ "Users", tr.ToArray() }
+					{ "Users", JsonConvert.SerializeObject(tr.ToArray()) }
 				}
 			};
 		}
